@@ -1,0 +1,8 @@
+
+			********************
+			**    Diocesis    **
+			********************
+
+V0.0.8 (19/07/2013)
+	1.- Se agrega la opcion de reporte simplificado y detallado en la Lista de Asistencia del módulo del Seminario.
+	

@@ -1,0 +1,17 @@
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\ClasesNegocio.dll
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\ClasesNegocio.pdb
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\ILTreeViewMenu.dll
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\Integralab.ORMSeguridad.dll
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\ORMDiocesis.dll
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\SD.LLBLGen.Pro.ORMSupportClasses.NET20.dll
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\Seguridad.dll
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\SD.LLBLGen.Pro.DQE.SqlServer.NET20.dll
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\System.Data.SQLite.dll
+C:\Proyectos\Diocesis\ClasesNegocio\bin\Release\Seguridad.XmlSerializers.dll
+C:\Proyectos\Diocesis\ClasesNegocio\obj\Release\ResolveAssemblyReference.cache
+C:\Proyectos\Diocesis\ClasesNegocio\obj\Release\ClasesNegocio.VisorReportes.resources
+C:\Proyectos\Diocesis\ClasesNegocio\obj\Release\ClasesNegocio.Properties.Resources.resources
+C:\Proyectos\Diocesis\ClasesNegocio\obj\Release\ResGen.read.1.tlog
+C:\Proyectos\Diocesis\ClasesNegocio\obj\Release\ResGen.write.1.tlog
+C:\Proyectos\Diocesis\ClasesNegocio\obj\Release\ClasesNegocio.dll
+C:\Proyectos\Diocesis\ClasesNegocio\obj\Release\ClasesNegocio.pdb
