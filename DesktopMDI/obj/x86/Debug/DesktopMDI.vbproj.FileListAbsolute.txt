@@ -115,10 +115,8 @@ C:\git\diocesis\DesktopMDI\obj\x86\Debug\Diocesis.frmMenuPrincipal.resources
 C:\git\diocesis\DesktopMDI\obj\x86\Debug\Diocesis.Resources.resources
 C:\git\diocesis\DesktopMDI\obj\x86\Debug\DesktopMDI.vbproj.GenerateResource.Cache
 C:\git\diocesis\DesktopMDI\bin\x86\Debug\Seguridad.pdb
-C:\git\seminario\DesktopMDI\bin\x86\Debug\Diocesis.exe.config
-C:\git\seminario\DesktopMDI\obj\x86\Debug\Diocesis.exe
-C:\git\seminario\DesktopMDI\obj\x86\Debug\Diocesis.pdb
 C:\git\seminario\DesktopMDI\bin\x86\Debug\Reportes\SemListaAsistenciaDet.cs
+C:\git\seminario\DesktopMDI\bin\x86\Debug\Diocesis.exe.config
 C:\git\seminario\DesktopMDI\bin\x86\Debug\Diocesis.exe.manifest
 C:\git\seminario\DesktopMDI\bin\x86\Debug\Diocesis.application
 C:\git\seminario\DesktopMDI\bin\x86\Debug\Diocesis.exe
@@ -126,6 +124,7 @@ C:\git\seminario\DesktopMDI\bin\x86\Debug\Diocesis.pdb
 C:\git\seminario\DesktopMDI\bin\x86\Debug\ClasesBiblioteca.dll
 C:\git\seminario\DesktopMDI\bin\x86\Debug\ClasesNegocio.dll
 C:\git\seminario\DesktopMDI\bin\x86\Debug\ClasesSeminario.dll
+C:\git\seminario\DesktopMDI\bin\x86\Debug\ClasesSorteo.dll
 C:\git\seminario\DesktopMDI\bin\x86\Debug\FormasSeguridad.dll
 C:\git\seminario\DesktopMDI\bin\x86\Debug\Integralab.ORMSeguridad.dll
 C:\git\seminario\DesktopMDI\bin\x86\Debug\SD.LLBLGen.Pro.ORMSupportClasses.NET20.dll
@@ -138,6 +137,7 @@ C:\git\seminario\DesktopMDI\bin\x86\Debug\SD.LLBLGen.Pro.DQE.SqlServer.NET20.dll
 C:\git\seminario\DesktopMDI\bin\x86\Debug\System.Data.SQLite.dll
 C:\git\seminario\DesktopMDI\bin\x86\Debug\ClasesBiblioteca.pdb
 C:\git\seminario\DesktopMDI\bin\x86\Debug\ClasesNegocio.pdb
+C:\git\seminario\DesktopMDI\bin\x86\Debug\ClasesSorteo.pdb
 C:\git\seminario\DesktopMDI\bin\x86\Debug\ClasesSeminario.pdb
 C:\git\seminario\DesktopMDI\bin\x86\Debug\Seguridad.pdb
 C:\git\seminario\DesktopMDI\bin\x86\Debug\ORMDiocesis.pdb
@@ -151,3 +151,5 @@ C:\git\seminario\DesktopMDI\obj\x86\Debug\DesktopMDI.vbproj.GenerateResource.Cac
 C:\git\seminario\DesktopMDI\obj\x86\Debug\Diocesis.TrustInfo.xml
 C:\git\seminario\DesktopMDI\obj\x86\Debug\Diocesis.exe.manifest
 C:\git\seminario\DesktopMDI\obj\x86\Debug\Diocesis.application
+C:\git\seminario\DesktopMDI\obj\x86\Debug\Diocesis.exe
+C:\git\seminario\DesktopMDI\obj\x86\Debug\Diocesis.pdb

@@ -74,6 +74,9 @@ Partial Class frmMenuPrincipal
         Me.tssmiVenMosaicoVert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssmiVenOrganIconos = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssmiVenAcercaDe = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SorteoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BienechoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssmiArchNuevo = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssmiArchGuardar = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssmiArchImprimir = New System.Windows.Forms.ToolStripMenuItem()
@@ -253,7 +256,7 @@ Partial Class frmMenuPrincipal
         '
         'MenuPrincipal
         '
-        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiArchivo, Me.tsmiEdicion, Me.CatálogosToolStripMenuItem, Me.tsmSeminario, Me.tsmiVentana})
+        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmiArchivo, Me.tsmiEdicion, Me.CatálogosToolStripMenuItem, Me.tsmSeminario, Me.tsmiVentana, Me.SorteoToolStripMenuItem})
         Me.MenuPrincipal.Location = New System.Drawing.Point(0, 0)
         Me.MenuPrincipal.MdiWindowListItem = Me.tsmiVentana
         Me.MenuPrincipal.Name = "MenuPrincipal"
@@ -278,28 +281,28 @@ Partial Class frmMenuPrincipal
         'tssmiEdiDeshacer
         '
         Me.tssmiEdiDeshacer.Name = "tssmiEdiDeshacer"
-        Me.tssmiEdiDeshacer.Size = New System.Drawing.Size(152, 22)
+        Me.tssmiEdiDeshacer.Size = New System.Drawing.Size(122, 22)
         Me.tssmiEdiDeshacer.Tag = "O"
         Me.tssmiEdiDeshacer.Text = "&Deshacer"
         '
         'tssmiEdiCortar
         '
         Me.tssmiEdiCortar.Name = "tssmiEdiCortar"
-        Me.tssmiEdiCortar.Size = New System.Drawing.Size(152, 22)
+        Me.tssmiEdiCortar.Size = New System.Drawing.Size(122, 22)
         Me.tssmiEdiCortar.Tag = "O"
         Me.tssmiEdiCortar.Text = "Cor&tar"
         '
         'tssmiEdiCopiar
         '
         Me.tssmiEdiCopiar.Name = "tssmiEdiCopiar"
-        Me.tssmiEdiCopiar.Size = New System.Drawing.Size(152, 22)
+        Me.tssmiEdiCopiar.Size = New System.Drawing.Size(122, 22)
         Me.tssmiEdiCopiar.Tag = "O"
         Me.tssmiEdiCopiar.Text = "&Copiar"
         '
         'tssmiEdiPegar
         '
         Me.tssmiEdiPegar.Name = "tssmiEdiPegar"
-        Me.tssmiEdiPegar.Size = New System.Drawing.Size(152, 22)
+        Me.tssmiEdiPegar.Size = New System.Drawing.Size(122, 22)
         Me.tssmiEdiPegar.Tag = "O"
         Me.tssmiEdiPegar.Text = "&Pegar"
         '
@@ -490,6 +493,25 @@ Partial Class frmMenuPrincipal
         Me.tssmiVenAcercaDe.Size = New System.Drawing.Size(175, 22)
         Me.tssmiVenAcercaDe.Tag = "O"
         Me.tssmiVenAcercaDe.Text = "&Acerca de..."
+        '
+        'SorteoToolStripMenuItem
+        '
+        Me.SorteoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CToolStripMenuItem, Me.BienechoresToolStripMenuItem})
+        Me.SorteoToolStripMenuItem.Name = "SorteoToolStripMenuItem"
+        Me.SorteoToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
+        Me.SorteoToolStripMenuItem.Text = "Sorteo"
+        '
+        'CToolStripMenuItem
+        '
+        Me.CToolStripMenuItem.Name = "CToolStripMenuItem"
+        Me.CToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CToolStripMenuItem.Text = "Equipos"
+        '
+        'BienechoresToolStripMenuItem
+        '
+        Me.BienechoresToolStripMenuItem.Name = "BienechoresToolStripMenuItem"
+        Me.BienechoresToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BienechoresToolStripMenuItem.Text = "Bienechores"
         '
         'tssmiArchNuevo
         '
@@ -761,7 +783,6 @@ Partial Class frmMenuPrincipal
     Friend WithEvents ToolStripMenuItem70 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tssmiArchSalir As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsmiEdicion As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tsmiVentana As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents tsslFecha As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents BottomToolStripPanel As System.Windows.Forms.ToolStripPanel
@@ -794,11 +815,6 @@ Partial Class frmMenuPrincipal
     Friend WithEvents tssmiEdiCortar As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tssmiEdiCopiar As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tssmiEdiPegar As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tssmiVenCascada As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tssmiVenMosaicoHoriz As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tssmiVenMosaicoVert As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tssmiVenOrganIconos As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents tssmiVenAcercaDe As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tssmBiblioteca As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tssmSeminario As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tssmGenerales As System.Windows.Forms.ToolStripMenuItem
@@ -813,5 +829,14 @@ Partial Class frmMenuPrincipal
     Friend WithEvents LectoresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FormatosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EstatusToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SorteoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BienechoresToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsmiVentana As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tssmiVenCascada As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tssmiVenMosaicoHoriz As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tssmiVenMosaicoVert As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tssmiVenOrganIconos As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tssmiVenAcercaDe As System.Windows.Forms.ToolStripMenuItem
 
 End Class

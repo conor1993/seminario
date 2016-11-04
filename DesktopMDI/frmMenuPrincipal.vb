@@ -6,6 +6,7 @@ Imports IntegraLab.FormasSeguridad
 Imports ClasesNegocio
 Imports ClasesSeminario
 Imports ClasesBiblioteca
+Imports ClasesSorteo
 Imports ClasesBiblioteca.Formas.Catalogos
 
 Public Class frmMenuPrincipal
@@ -322,7 +323,19 @@ Public Class frmMenuPrincipal
     Private Sub tssmiCatLibros_Click(sender As System.Object, e As System.EventArgs) Handles tssmiCatLibros.Click
         Dim forma As New Forma(Of ClasesBiblioteca.frmInvLibros)(Me)
     End Sub
+
+    Private Sub CToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CToolStripMenuItem.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmEquipos)(Me)
+
+    End Sub
+
+    Private Sub BienechoresToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BienechoresToolStripMenuItem.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmBienechores)(Me)
+    End Sub
 #End Region
+
+
+
 
 #Region "FormasSeminario"
     Private Sub ParroquiasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ParroquiasToolStripMenuItem.Click
@@ -345,11 +358,4 @@ Public Class frmMenuPrincipal
 #End Region
 
 
-
-
-
-
-    Private Sub tssmiEdiCortar_Click(sender As System.Object, e As System.EventArgs) Handles tssmiEdiCortar.Click
-
-    End Sub
 End Class

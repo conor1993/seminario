@@ -211,6 +211,10 @@
       <Project>{4A2897A4-F407-4E5B-B0B7-13E2B526F38C}</Project>
       <Name>ClasesNegocio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClasesSorteo\ClasesSorteo.csproj">
+      <Project>{4D9AC97B-FB1E-4F48-9FC6-B04260F8F430}</Project>
+      <Name>ClasesSorteo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Seminario\ClasesSeminario.csproj">
       <Project>{D52D4654-D7CD-4043-9768-B56F5BD68621}</Project>
       <Name>ClasesSeminario</Name>

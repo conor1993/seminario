@@ -135,6 +135,7 @@ namespace ClasesSeminario
 
                 SqlCommand _SQLComm = new SqlCommand();
 
+
                 _SQLComm.CommandText = "BorrarParroquia";
                 _SQLComm.CommandType = CommandType.StoredProcedure;
                 _SQLComm.Connection = CN.DBU.Cnn;

@@ -11,14 +11,14 @@
     <deploymentProvider codebase="file://win-yt43ougpbsh/publicaciones/Diocesis.application" />
   </deployment>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Diocesis.exe.manifest" size="20672">
+    <dependentAssembly dependencyType="install" codebase="Diocesis.exe.manifest" size="21297">
       <assemblyIdentity name="Diocesis.exe" version="10.00.00.10" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>hPlIe6+J1UyCvfDDDHtnYDRt4h8=</dsig:DigestValue>
+        <dsig:DigestValue>nwpS8/HYgufV2QSMFdVTRN4DM8E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
