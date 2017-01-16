@@ -148,6 +148,12 @@
     <Compile Include="Formas\Catalogos\frmCatSecciones.Designer.cs">
       <DependentUpon>frmCatSecciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formas\Catalogos\frmConfirmarImpresionEt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formas\Catalogos\frmConfirmarImpresionEt.Designer.cs">
+      <DependentUpon>frmConfirmarImpresionEt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formas\Catalogos\frmInvLibros.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,51 @@
       <DependentUpon>frmCatLectores.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reporte\EtiquetaClm1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EtiquetaClm1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reporte\EtiquetaClm2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EtiquetaClm2.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reporte\EtiquetaClm3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EtiquetaClm3.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reporte\EtiquetaClm4.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EtiquetaClm4.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reporte\EtiquetaClm5.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EtiquetaClm5.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reporte\EtiquetasLista.cs">
+      <DependentUpon>EtiquetasLista.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="reporte\Etiquetas.cs">
+      <DependentUpon>Etiquetas.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="reporte\Etiquetas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Etiquetas.xsd</DependentUpon>
+    </Compile>
     <Compile Include="reporte\listaEtiquetas.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,11 +272,38 @@
     <EmbeddedResource Include="Formas\Catalogos\frmCatSecciones.resx">
       <DependentUpon>frmCatSecciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Formas\Catalogos\frmConfirmarImpresionEt.resx">
+      <DependentUpon>frmConfirmarImpresionEt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Formas\Catalogos\frmInvLibros.resx">
       <DependentUpon>frmInvLibros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formas\Catalogos\frmCatLectores.resx">
       <DependentUpon>frmCatLectores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reporte\EtiquetaClm1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EtiquetaClm1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reporte\EtiquetaClm2.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EtiquetaClm2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reporte\EtiquetaClm3.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EtiquetaClm3.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reporte\EtiquetaClm4.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EtiquetaClm4.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reporte\EtiquetaClm5.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EtiquetaClm5.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="reporte\EtiquetasLista.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EtiquetasLista.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="reporte\listaEtiquetas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -244,6 +322,19 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="reporte\Etiquetas.xsc">
+      <DependentUpon>Etiquetas.xsd</DependentUpon>
+    </None>
+    <None Include="reporte\Etiquetas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Etiquetas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="reporte\Etiquetas.xss">
+      <DependentUpon>Etiquetas.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -116,7 +116,7 @@
     <Compile Include="Catalogos\Biblioteca\Rama.cs" />
     <Compile Include="Catalogos\Biblioteca\Libro.cs" />
     <Compile Include="Catalogos\Biblioteca\Seccion.cs" />
-    <Compile Include="Catalogos\Generales\Pais.cs" />
+    <Compile Include="Catalogos\Biblioteca\Generales\Pais.cs" />
     <Compile Include="Catalogos\Participante.cs" />
     <Compile Include="Catalogos\Evento.cs" />
     <Compile Include="Clases Generales\ClassBase.cs" />
@@ -131,9 +131,9 @@
     <Compile Include="Formas\frmVisorReportes.Designer.cs">
       <DependentUpon>frmVisorReportes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Catalogos\Generales\Parroquia.cs" />
-    <Compile Include="Catalogos\Generales\Parrocos.cs" />
-    <Compile Include="Catalogos\Generales\Formatos.cs" />
+    <Compile Include="Catalogos\Biblioteca\Generales\Parroquia.cs" />
+    <Compile Include="Catalogos\Biblioteca\Generales\Parrocos.cs" />
+    <Compile Include="Catalogos\Biblioteca\Generales\Formatos.cs" />
     <Compile Include="Lectores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

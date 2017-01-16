@@ -15,11 +15,15 @@ using BarcodeLib;
 using System.Collections;
 using System.Drawing.Imaging;
 using r = ClasesBiblioteca.reporte;
+using fo = ClasesBiblioteca.Formas.Catalogos;
+using ClasesBiblioteca.reporte;
 //using dts = ClasesBiblioteca.dtsetiqueta;
 namespace ClasesBiblioteca
 {
     public partial class frmInvLibros : Form, CN.iForm
     {
+        private Boolean aumentarlibro = false;
+
         private DataSet dtsParticip = new DataSet();
         private DataView dvwParticip;
 
@@ -49,10 +53,14 @@ namespace ClasesBiblioteca
         CN.EventoCol ColEventos= new CN.EventoCol();
 
         CN.Libro[] LI;
+        ArrayList codigos;
         Boolean puedorefrescar = true;
         Boolean Editar = false;
         Boolean selesccionado = false;
-
+        //
+        fo.frmConfirmarImpresionEt conf = new fo.frmConfirmarImpresionEt();
+        int posEtiqueta;
+        int numeEtiquetas;
     
         Dictionary<string, int> list = new Dictionary<string, int>();
 
@@ -71,6 +79,7 @@ namespace ClasesBiblioteca
         }
 
         #region "iForm"
+
         Boolean[] CN.iForm.ToolBarStatus
         {
             get { return _ToolBarStatus; }
@@ -80,17 +89,37 @@ namespace ClasesBiblioteca
         void CN.iForm.Guardar()
         {
 
-                
-                String etiqueta; 
+            if (aumentarlibro == true) {
+                CN.LibroCol Libros = new CN.LibroCol();
+                if (txtIsbn.Text.Trim() != null)
+                {
+                     if (Libros.Obtener(txtIsbn.Text) > 0)
+                     {
+                         LI = Libros.ListarLibro();
+                     }
 
+                }
+                else {
+                    if (Libros.Obtener(txtTitulo.Text, Convert.ToInt32(cmbAutor.SelectedValue), Convert.ToInt32(cmbEditorial.SelectedValue)) > 0)
+                    {
+                        LI = Libros.ListarLibro();
+                    }
+                }
+                Libro = null;
+            }
+
+
+            DialogResult result;
+            bool nuevo = false;
+                String etiqueta=""; 
                 if (!Validar())
                     return;
 
-   
-           
-               if (Libro == null) Libro = new CN.Libro();
-                 
-                
+
+                if (Libro == null) { nuevo = true; Libro = new CN.Libro(); }
+
+
+
                 try
                 {
 
@@ -107,13 +136,15 @@ namespace ClasesBiblioteca
                        
                     Libro.Edicion = txtEdicion.Text;
                     Libro.Año = Convert.ToInt32(txtAño.Text);
-                    Libro.Pasillo = Convert.ToInt32(txtpasillo.Text);
-                    Libro.Estante = Convert.ToInt32(txtestante.Text);
-                    Libro.Nivel = Convert.ToInt32(txtnivel.Text);
+                    Libro.Pasillo = txtpasillo.Text;
+                    Libro.Estante = txtestante.Text;
+                    Libro.Nivel = txtnivel.Text;
                     
                     Libro.Materia = txtMateria.Text;
                     Libro.Estatus = (int)cmbEstatus.SelectedValue;
                     Libro.Formato = (int)cmbFormato.SelectedValue;
+
+
 
                     if (txtIsbn.Text.Trim() != "")
                     {
@@ -125,17 +156,33 @@ namespace ClasesBiblioteca
                             String consecutivo = cont.ToString();
                             Libro.numero = txtIsbn.Text + "" + consecutivo;
 
+
                         }
                         else {
                             
                             Libro.numero = txtIsbn.Text+"1"; }
+                        if (nuevo == false)
+                        {
+                            Libro.numero = txtNumero.Text.ToString().Trim();
+                        }
                     }
                     else
                     {
 
-                        int cont = LI.Count()+1;
-                        etiqueta =cont.ToString()+ txtTitulo.Text[0].ToString() + txtTitulo.Text[1].ToString() + cmbAutor.Text[0].ToString() + cmbAutor.Text[1].ToString() + cmbEditorial.Text[0].ToString() + cmbEditorial.Text[1].ToString() + cmbEditorial.Text[2].ToString() + cmbRama.Text[0].ToString() + cmbRama.Text[1].ToString() + cmbRama.Text[2].ToString() + txtEdicion.Text.ToString();
-                        Libro.numero = etiqueta;
+                        int cont;
+                        if (LI != null)
+                        {
+                            cont = LI.Count() + 1;
+                        }
+                        else {
+                            cont = 1; 
+
+                        }
+                         
+                        Libro.ISBN = "";                                  
+                        etiqueta =cont.ToString()+ txtTitulo.Text[0].ToString() + txtTitulo.Text[1].ToString() + cmbAutor.Text[0].ToString() + cmbAutor.Text[1].ToString() + cmbEditorial.Text[0].ToString() + cmbEditorial.Text[1].ToString() + cmbEditorial.Text[2].ToString() + cmbRama.Text[0].ToString() + cmbRama.Text[1].ToString() + cmbRama.Text[2].ToString()+txtEdicion.Text.ToString();
+                        Libro.numero = etiqueta.Trim();
+                       
                       
                     }
 
@@ -174,9 +221,41 @@ namespace ClasesBiblioteca
                        
                     }
 
-                        Libro.Guardar();
-                        Libro = null;
-                   
+                    
+                    
+
+                        if (txtIsbn.Text.Trim().Equals(""))
+                        {
+                            if (nuevo == true) {
+                                result = MessageBox.Show("el isbn esta vacio, se generara el siguiente " + etiqueta, "Confirmation", MessageBoxButtons.YesNoCancel);
+                                if (result == DialogResult.Yes)
+                                {
+                                    
+                                    Libro.Guardar();
+
+                                }
+
+                            }else
+                            {
+                                Libro.Guardar();
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            Libro.Guardar();
+
+                        }
+                    
+                    
+
+
+
+
+
+                    Libro = null;
                 }
                 catch (Exception ex)
                 {
@@ -283,7 +362,7 @@ namespace ClasesBiblioteca
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
             }
         }
 
@@ -291,7 +370,7 @@ namespace ClasesBiblioteca
         {
             try
             {
-                codigoBarras(txtCodigo.Text);
+               // codigoBarras(txtCodigo.Text);
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -352,11 +431,11 @@ namespace ClasesBiblioteca
                         if (Libro.Estatus != null) { cmbEstatus.SelectedValue = Libro.Estatus; }
                         //if (Libro.IdSeccion != null){cmbSeccion.SelectedValue = Libro.IdSeccion; }
                         if (Libro.IdTematica != null) { cmbTematica.SelectedValue = Libro.IdTematica; }
-                        txtEdicion.Text = Libro.Edicion;
-                        txtAño.Text = Libro.Año.ToString();
-                        txtpasillo.Text = Libro.Pasillo.ToString();
-                        txtestante.Text = Libro.Estante.ToString();
-                        txtnivel.Text = Libro.Nivel.ToString();
+                        txtEdicion.Text = Libro.Edicion.ToString().Trim();
+                        txtAño.Text = Libro.Año.ToString().Trim();
+                        txtpasillo.Text = Libro.Pasillo.ToString().Trim();
+                        txtestante.Text = Libro.Estante.ToString().Trim();
+                        txtnivel.Text = Libro.Nivel.ToString().Trim();
                         txtIsbn.Text = Libro.ISBN;
                         txtMateria.Text = Libro.Materia;
                         chkIlustrado.Checked = (bool)Libro.Ilustrado;
@@ -404,27 +483,154 @@ namespace ClasesBiblioteca
         }
 
         void CN.iForm.Imprimir()
-        {
-            if (txtNumero.Text.Trim() == "")return;
+        {   
+
+            CN.Libro libb; 
             crearDirectorio();
+            generacod();
+            int tamañoEtiquetas = 0;
+           
+
+            for (int k = 0; k < codigos.Count; k = k + numeEtiquetas)
+            {
 
 
 
-            String codigo = txtNumero.Text;
-            String tit = txtTitulo.Text;
-            codigoBarras(codigo);
-            r.listaEtiquetas reporte = new r.listaEtiquetas();
-            try{
-            string path = @"C:\codigos\i.png";
-            reporte.SetParameterValue("picturePath", path);
-            reporte.SetParameterValue("etiqueta", tit);
-            CN.VisorReportes visor = new CN.VisorReportes();
-            visor.Text = "Codigo de barra";
-            visor.Reporte = reporte;
-            visor.ShowDialog();
+
+
+                if (conf.ShowDialog() == DialogResult.OK)
+                {
+                    
+                    posEtiqueta = Int32.Parse(conf.pos.Trim());
+                    numeEtiquetas = 25 - posEtiqueta;
+
+                   
+
+                    String tit = txtTitulo.Text;
+                    r.listaEtiquetas reporte = new r.listaEtiquetas();
+                    try
+                    {
+
+                        for (int i = 1; i < 25; i++)
+                        {
+                            reporte.SetParameterValue("picturePath" + i, @"C:\codigos\i.bmp");
+                            reporte.SetParameterValue("etiqueta"+i, "");
+                        }
+
+                        
+                        for (int i = k; i < numeEtiquetas + k ; i++)
+                        {
+                            try
+                            {
+                                libb = (CN.Libro)codigos[i];
+
+                                reporte.SetParameterValue("picturePath" + posEtiqueta, @"C:\codigos\" + libb.Estante + libb.Pasillo + i + ".bmp");
+                                reporte.SetParameterValue("etiqueta" + posEtiqueta, "est-> "+libb.Estante+"/"+"pas-> " +libb.Pasillo);
+                                posEtiqueta = posEtiqueta + 1;
+                            }
+                            catch (Exception ex) {
+                                break;
+                            }
+
+                        }
+                        
+
+
+
+
+                        //-------------------------------------------------------------------
+
+
+                        
+                        CN.VisorReportes visor = new CN.VisorReportes();
+                        visor.Text = "Codigo de barra";
+                        visor.Reporte = reporte;
+                        visor.ShowDialog();
+
+                    }
+
+                    catch (Exception ex) { MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); }
+
+
+
+
+                }
+                else {
+                    break;
+                }
+
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); }
+
             
+            
+        }
+
+        private void codigoBarras(ArrayList codigo)
+        {
+            Image imgFinal;
+            CN.Libro lib;
+            for (int i = 0; i < codigo.Count; i++) {
+
+                lib = (CN.Libro)codigo[i];
+                BarcodeLib.Barcode cod = new BarcodeLib.Barcode();
+                cod.IncludeLabel = true;
+                imgFinal = (Image)cod.Encode(BarcodeLib.TYPE.CODE128, lib.numero.ToString(), Color.Black, Color.White, 400, 100);
+                String src = @"C:\codigos\" + lib.Estante + lib.Pasillo + i + ".bmp";
+                imgFinal.Save(src, ImageFormat.Bmp);
+            }
+
+
+        }
+
+        public void generacod()
+        {
+
+            DataSet Dt = new DataSet();
+            DataTable dtb = new DataTable();
+            codigos = new ArrayList();
+            
+            CN.LibroCol Libros = new CN.LibroCol();
+            CN.Libro LII;
+            Libros.Obtener();
+            foreach (CN.Libro Libro in Libros)
+            {
+                
+                codigos.Add(Libro);
+
+            }
+         
+           
+            codigoBarras(codigos);
+           
+        }
+
+        private Etiquetas GetData(string query)
+        {
+            string conString = CN.DBU.ConnStr;
+            SqlCommand cmd = new SqlCommand(query);
+            using (SqlConnection con = new SqlConnection(conString))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+
+                    sda.SelectCommand = cmd;
+                    using (Etiquetas dsEmployees = new Etiquetas())
+                    {
+                        sda.Fill(dsEmployees, "DataTable1");
+                        return dsEmployees;
+                    }
+                }
+            }
+        }
+
+        public byte[] imageToByteArray(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                return ms.ToArray();
+            }
         }
 
         private void crearDirectorio()
@@ -438,6 +644,9 @@ namespace ClasesBiblioteca
 
                     // Try to create the directory.
                     DirectoryInfo di = Directory.CreateDirectory(path);
+                }
+                else {
+                    System.IO.Directory.Delete("path", true);
                 }
 
 
@@ -464,6 +673,7 @@ namespace ClasesBiblioteca
             }
             
         }
+
         private void llenarCombos()
         {
 
@@ -662,12 +872,13 @@ namespace ClasesBiblioteca
             String cons = "";
             
             DtAdap = new SqlDataAdapter();
-            cons = "select Libro.id ,Libro.ISBN as Isbn, Libro.Titulo as Titulo, Autor.Nombre as Autor from BInvLibros as Libro join BCatAutores as Autor  on Autor.Id = Libro.IdAutor";
+            cons = "select Libro.id ,Libro.ISBN as Isbn, Libro.Titulo as Titulo, Autor.Nombre as Autor ,Rama.Nombre as Rama,Tematica.Nombre as Tematica from BInvLibros as Libro  join BCatAutores as Autor  on Autor.Id = Libro.IdAutor join BCatRamas AS Rama on Rama.Id = Libro.IdRama join BCatTematicas as Tematica on Tematica.Id  = Libro.IdTematica";
             DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
             dtsParticip.Tables.Clear();
             DtAdap.Fill(dtsParticip);
             DtAdap = null;
             //dttParticip = dtsParticip.Tables[0];
+            dataLibros.AutoGenerateColumns = false;
             dvwParticip = new DataView(dtsParticip.Tables[0]);
             dataLibros.DataSource = dvwParticip;
              
@@ -755,112 +966,14 @@ namespace ClasesBiblioteca
         }
 
         private void cmbAutor_KeyPress(object sender, KeyPressEventArgs e)
-        { 
-          /*  
-            var ColAutores = from r in loColAutores
-                             where r.Nombre.ToString().Contains("x")
-                             select r;
-            */
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
         {
 
         }
-
-        private void dataLibros_DoubleClick(object sender, EventArgs e)
-        {
-
-            Cursor = Cursors.WaitCursor;
-            try
-            {
-                if (dataLibros.SelectedRows.Count > 0)
-                {
-                    Libro = new CN.Libro();
-                    Libro.MensajeError += Evento_MensajeError;
-                    if (Libro.Obtener(Convert.ToInt32(dataLibros.SelectedRows[0].Cells[0].Value)))
-                    {
-                           
-                        txtCodigo.Text = Libro.Id.ToString();
-                        txtTitulo.Text = Libro.Titulo;
-                        cmbAutor.SelectedValue = Libro.IdAutor;
-                        cmbEditorial.SelectedValue = Libro.IdEditorial;
-                        txtNumero.Text = Libro.numero;
-                       
-                        if (Libro.IdPais != null) {cmbPais.SelectedValue = Libro.IdPais; }
-                        if (Libro.IdRama != null) {cmbRama.SelectedValue = Libro.IdRama; }
-                        if (Libro.Formato != null){cmbFormato.SelectedValue = Libro.Formato;}
-                        if (Libro.Estatus != null){cmbEstatus.SelectedValue = Libro.Estatus; }
-                        //if (Libro.IdSeccion != null){cmbSeccion.SelectedValue = Libro.IdSeccion; }
-                        if (Libro.IdTematica != null){cmbTematica.SelectedValue = Libro.IdTematica;}
-                        txtEdicion.Text = Libro.Edicion;
-                        txtAño.Text = Libro.Año.ToString();
-                        txtpasillo.Text = Libro.Pasillo.ToString();
-                        txtestante.Text = Libro.Estante.ToString();
-                        txtnivel.Text = Libro.Nivel.ToString();
-                        txtIsbn.Text = Libro.ISBN;
-                        txtMateria.Text = Libro.Materia;
-
-                        if (Libro.ISBN != "")
-                        {
-                            int cantidadLibros = numeroLibros(Libro.ISBN);
-                            txtEjemplares.Text = cantidadLibros.ToString();
-                        }
-                        else
-                        {
-                            String idaut = Libro.IdAutor.ToString();
-                            String idedit = Libro.IdEditorial.ToString();
-                            int cantidadLibros = numeroLibros2(Libro.Titulo, Convert.ToInt32(idaut), Convert.ToInt32(idedit));
-                            txtEjemplares.Text = cantidadLibros.ToString();
-                                 
-                        }
-                        chkIlustrado.Checked = (bool)Libro.Ilustrado;
-                        chkSoloConsulta.Checked = (bool)Libro.SoloConsulta;
-
-
-
-                        
-
-                        
-                        //cargar portada
-                        try
-                        {
-                            byte[] arrImag = (byte[])Libro.Portada;
-                            MemoryStream ms = new MemoryStream(arrImag);
-                            Image img = Image.FromStream(ms);
-                            ms.Close();
-                            picPortada.Image = img;
-                        }
-                        catch
-                        {
-                            picPortada.Image = null;
-                        }
-                        //cargar contraportada
-                        try
-                        {
-                            byte[] arrImag = (byte[])Libro.ContraPortada;
-                            MemoryStream ms = new MemoryStream(arrImag);
-                            Image img = Image.FromStream(ms);
-                            ms.Close();
-                            picContraportada.Image = img;
-                        }
-                        catch
-                        {
-                            picContraportada.Image = null;
-                        }
- 
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                   }
-            finally
-            {
-                Cursor = Cursors.Default;
-            }
-        }
-
 
         private void btnBuscarPortada_Click(object sender, EventArgs e)
         {
@@ -1026,7 +1139,6 @@ namespace ClasesBiblioteca
             return contador;
         
         }
- 
 
         private void cmbAutor_Leave(object sender, EventArgs e)
         {
@@ -1226,64 +1338,53 @@ namespace ClasesBiblioteca
 
         private void cmbTematica_Leave(object sender, EventArgs e)
         {
-            if (cmbTematica.Text.Trim() != "")
+            try
             {
-                CN.TematicaCol col = new CN.TematicaCol();
-
-                if (col.Obtener(cmbTematica.Text) > 0)
+                if (cmbTematica.Text.Trim() != "")
                 {
+                    CN.TematicaCol col = new CN.TematicaCol();
 
-                }
-                else
-                {
-                    DialogResult result = MessageBox.Show("La tematica no existe desea agregarla", "Confirmation", MessageBoxButtons.YesNoCancel);
-                    if (result == DialogResult.Yes)
+                    if (col.Obtener(cmbTematica.Text) > 0)
                     {
 
-                        CN.Tematica tem = new CN.Tematica();
-                        tem.Nombre = cmbTematica.Text;
-                        tem.Guardar();
-
-                        loTematica = new CN.TematicaCol();
-                        loTematica.Obtener();
-                        cmbTematica.DisplayMember = "Nombre";
-                        cmbTematica.ValueMember = "Id";
-                        cmbTematica.DataSource = loTematica;
-                        cmbTematica.SelectedIndex = -1;
-
-                        string[] tematica;
-                        tematica = loTematica.Listar();
-                        cmbTematica.AutoCompleteCustomSource.AddRange(tematica.ToArray());
-                        cmbTematica.AutoCompleteMode = AutoCompleteMode.Suggest;
-                        cmbTematica.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                        cmbTematica.Focus();
                     }
                     else
                     {
+                        DialogResult result = MessageBox.Show("La tematica no existe desea agregarla", "Confirmation", MessageBoxButtons.YesNoCancel);
+                        if (result == DialogResult.Yes)
+                        {
 
-                        cmbTematica.Text = "";
-                        cmbTematica.SelectedIndex = -1;
-                        cmbTematica.Focus();
+                            CN.Tematica tem = new CN.Tematica();
+                            tem.Nombre = cmbTematica.Text;
+                            tem.Guardar();
+
+                            loTematica = new CN.TematicaCol();
+                            loTematica.Obtener();
+                            cmbTematica.DisplayMember = "Nombre";
+                            cmbTematica.ValueMember = "Id";
+                            cmbTematica.DataSource = loTematica;
+                            cmbTematica.SelectedIndex = -1;
+
+                            string[] tematica;
+                            tematica = loTematica.Listar();
+                            cmbTematica.AutoCompleteCustomSource.AddRange(tematica.ToArray());
+                            cmbTematica.AutoCompleteMode = AutoCompleteMode.Suggest;
+                            cmbTematica.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                            cmbTematica.Focus();
+                        }
+                        else
+                        {
+
+                            cmbTematica.Text = "";
+                            cmbTematica.SelectedIndex = -1;
+                            cmbTematica.Focus();
+                        }
                     }
+
                 }
-
             }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-
-        private Image codigoBarras(String codigo) {
-            
-            Image imgFinal;
-            BarcodeLib.Barcode cod = new BarcodeLib.Barcode();
-            cod.IncludeLabel = true;
-            imgFinal = (Image)cod.Encode(BarcodeLib.TYPE.CODE128, codigo, Color.Black, Color.White, 400, 100);
-            String src = @"C:\codigos\i.png";
-            imgFinal.Save(src, ImageFormat.Png);
-            
-               
-            return imgFinal;
-        
-        }
-
 
         private void comprobarExistencia(){
             if (txtTitulo.Text.Trim() != "" && cmbAutor.Text.Trim() != "" && cmbEditorial.Text.Trim() != "")
@@ -1318,6 +1419,168 @@ namespace ClasesBiblioteca
             {
             }
         }
+
+        private void txtIsbn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números 
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+                if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso 
+                {
+                    e.Handled = false;
+                }
+                else
+                {
+                    //el resto de teclas pulsadas se desactivan 
+                    e.Handled = true;
+                }
+        }
+
+        private void cmbEditorial_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        private void cmbPais_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        private void cmbRama_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        private void cmbTematica_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        private void txtpasillo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        private void txtestante_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        private void txtnivel_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        private void dataLibros_DoubleClick(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            try
+            {
+                if (dataLibros.SelectedRows.Count > 0)
+                {
+                    Libro = new CN.Libro();
+                    Libro.MensajeError += Evento_MensajeError;
+                    if (Libro.Obtener(Convert.ToInt32(dataLibros.SelectedRows[0].Cells[0].Value)))
+                    {
+
+                        txtCodigo.Text = Libro.Id.ToString();
+                        txtTitulo.Text = Libro.Titulo;
+                        cmbAutor.SelectedValue = Libro.IdAutor;
+                        cmbEditorial.SelectedValue = Libro.IdEditorial;
+                        txtNumero.Text = Libro.numero;
+
+                        if (Libro.IdPais != null) { cmbPais.SelectedValue = Libro.IdPais; }
+                        if (Libro.IdRama != null) { cmbRama.SelectedValue = Libro.IdRama; }
+                        if (Libro.Formato != null) { cmbFormato.SelectedValue = Libro.Formato; }
+                        if (Libro.Estatus != null) { cmbEstatus.SelectedValue = Libro.Estatus; }
+                        //if (Libro.IdSeccion != null){cmbSeccion.SelectedValue = Libro.IdSeccion; }
+                        if (Libro.IdTematica != null) { cmbTematica.SelectedValue = Libro.IdTematica; }
+                        txtEdicion.Text = Libro.Edicion;
+                        txtAño.Text = Libro.Año.ToString();
+                        txtpasillo.Text = Libro.Pasillo.ToString();
+                        txtestante.Text = Libro.Estante.ToString();
+                        txtnivel.Text = Libro.Nivel.ToString();
+                        txtIsbn.Text = Libro.ISBN;
+                        txtMateria.Text = Libro.Materia;
+
+                        if (Libro.ISBN != "")
+                        {
+                            int cantidadLibros = numeroLibros(Libro.ISBN);
+                            txtEjemplares.Text = cantidadLibros.ToString();
+                        }
+                        else
+                        {
+                            String idaut = Libro.IdAutor.ToString();
+                            String idedit = Libro.IdEditorial.ToString();
+                            int cantidadLibros = numeroLibros2(Libro.Titulo, Convert.ToInt32(idaut), Convert.ToInt32(idedit));
+                            txtEjemplares.Text = cantidadLibros.ToString();
+
+                        }
+                        chkIlustrado.Checked = (bool)Libro.Ilustrado;
+                        chkSoloConsulta.Checked = (bool)Libro.SoloConsulta;
+
+
+
+
+
+
+                        //cargar portada
+                        try
+                        {
+                            byte[] arrImag = (byte[])Libro.Portada;
+                            MemoryStream ms = new MemoryStream(arrImag);
+                            Image img = Image.FromStream(ms);
+                            ms.Close();
+                            picPortada.Image = img;
+                        }
+                        catch
+                        {
+                            picPortada.Image = null;
+                        }
+                        //cargar contraportada
+                        try
+                        {
+                            byte[] arrImag = (byte[])Libro.ContraPortada;
+                            MemoryStream ms = new MemoryStream(arrImag);
+                            Image img = Image.FromStream(ms);
+                            ms.Close();
+                            picContraportada.Image = img;
+                        }
+                        catch
+                        {
+                            picContraportada.Image = null;
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAumentar_Click(object sender, EventArgs e)
+        {
+            
+                 aumentarlibro = true;
+                ((CN.iForm)this).Guardar();
+            
+
+        }
+
+
 
     }
 }
