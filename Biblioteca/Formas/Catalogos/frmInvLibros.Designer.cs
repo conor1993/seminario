@@ -40,6 +40,13 @@
             this.btnBuscarPortada = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataLibros = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Isbn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Titulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rama = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tematica = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.imprimir = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnAumentar = new System.Windows.Forms.Button();
             this.txtEdicion = new System.Windows.Forms.TextBox();
@@ -84,13 +91,6 @@
             this.chkSoloConsulta = new System.Windows.Forms.CheckBox();
             this.txtCodigo = new System.Windows.Forms.MaskedTextBox();
             this.Label1 = new System.Windows.Forms.Label();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Isbn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Titulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rama = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tematica = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.imprimir = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Contraportada.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -244,6 +244,49 @@
             this.dataLibros.Size = new System.Drawing.Size(952, 251);
             this.dataLibros.TabIndex = 101;
             this.dataLibros.DoubleClick += new System.EventHandler(this.dataLibros_DoubleClick);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.Visible = false;
+            // 
+            // Isbn
+            // 
+            this.Isbn.DataPropertyName = "Isbn";
+            this.Isbn.HeaderText = "Isbn";
+            this.Isbn.Name = "Isbn";
+            // 
+            // Titulo
+            // 
+            this.Titulo.DataPropertyName = "Titulo";
+            this.Titulo.HeaderText = "Titulo";
+            this.Titulo.Name = "Titulo";
+            // 
+            // Autor
+            // 
+            this.Autor.DataPropertyName = "Autor";
+            this.Autor.HeaderText = "Autor";
+            this.Autor.Name = "Autor";
+            // 
+            // Rama
+            // 
+            this.Rama.DataPropertyName = "Rama";
+            this.Rama.HeaderText = "Rama";
+            this.Rama.Name = "Rama";
+            // 
+            // Tematica
+            // 
+            this.Tematica.DataPropertyName = "Tematica";
+            this.Tematica.HeaderText = "Tematica";
+            this.Tematica.Name = "Tematica";
+            // 
+            // imprimir
+            // 
+            this.imprimir.DataPropertyName = "imprimir";
+            this.imprimir.HeaderText = "imprimir";
+            this.imprimir.Name = "imprimir";
             // 
             // groupBox3
             // 
@@ -486,7 +529,7 @@
             this.cmbEditorial.Size = new System.Drawing.Size(350, 28);
             this.cmbEditorial.TabIndex = 4;
             this.cmbEditorial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbEditorial_KeyPress);
-            this.cmbEditorial.Leave += new System.EventHandler(this.cmbEditorial_Leave);
+            this.cmbEditorial.Leave += new System.EventHandler(this.cmbEditorial_Leave_1);
             // 
             // label8
             // 
@@ -801,48 +844,6 @@
             this.Label1.TabIndex = 0;
             this.Label1.Text = "Código:";
             this.Label1.Visible = false;
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
-            this.id.Visible = false;
-            // 
-            // Isbn
-            // 
-            this.Isbn.DataPropertyName = "Isbn";
-            this.Isbn.HeaderText = "Isbn";
-            this.Isbn.Name = "Isbn";
-            // 
-            // Titulo
-            // 
-            this.Titulo.DataPropertyName = "Titulo";
-            this.Titulo.HeaderText = "Titulo";
-            this.Titulo.Name = "Titulo";
-            // 
-            // Autor
-            // 
-            this.Autor.DataPropertyName = "Autor";
-            this.Autor.HeaderText = "Autor";
-            this.Autor.Name = "Autor";
-            // 
-            // Rama
-            // 
-            this.Rama.DataPropertyName = "Rama";
-            this.Rama.HeaderText = "Rama";
-            this.Rama.Name = "Rama";
-            // 
-            // Tematica
-            // 
-            this.Tematica.DataPropertyName = "Tematica";
-            this.Tematica.HeaderText = "Tematica";
-            this.Tematica.Name = "Tematica";
-            // 
-            // imprimir
-            // 
-            this.imprimir.HeaderText = "imprimir";
-            this.imprimir.Name = "imprimir";
             // 
             // frmInvLibros
             // 

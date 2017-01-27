@@ -112,6 +112,7 @@ F:\git\seminario\Biblioteca\bin\x86\Debug\Interop.WIA.dll
 F:\git\seminario\Biblioteca\obj\x86\Debug\ClasesBiblioteca.csprojResolveAssemblyReference.cache
 F:\git\seminario\Biblioteca\obj\x86\Debug\Interop.WIA.dll
 F:\git\seminario\Biblioteca\obj\x86\Debug\ClasesBiblioteca.csproj.ResolveComReference.cache
+F:\git\seminario\Biblioteca\obj\x86\Debug\ClasesBiblioteca.Formas.Catalogos.frmAumentarisbn.resources
 F:\git\seminario\Biblioteca\obj\x86\Debug\ClasesBiblioteca.Formas.Catalogos.frmCatEstatus.resources
 F:\git\seminario\Biblioteca\obj\x86\Debug\ClasesBiblioteca.Formas.Catalogos.frmCatFormato.resources
 F:\git\seminario\Biblioteca\obj\x86\Debug\ClasesBiblioteca.frmCatPaises.resources

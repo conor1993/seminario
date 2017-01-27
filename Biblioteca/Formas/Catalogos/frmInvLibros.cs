@@ -34,7 +34,7 @@ namespace ClasesBiblioteca
 
 
 
-
+        fo.frmAumentarisbn isbaumn = new fo.frmAumentarisbn();
         OpenFileDialog BuscarImagen = new OpenFileDialog();
 
         CN.PaisCol loColPaises = new CN.PaisCol();
@@ -194,9 +194,10 @@ namespace ClasesBiblioteca
                     // Stream usado como buffer
                     System.IO.MemoryStream ms = new System.IO.MemoryStream();
                     // Se guarda la imagen en el buffer
+
                     picPortada.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     // Se extraen los bytes del buffer para asignarlos como valor para el  parámetro.
-                    Libro.Portada = ms.GetBuffer();
+                    Libro.Portada = imageToByteArray(resizeImage(picPortada.Image, new Size(640, 480))); 
                      }
                     catch(Exception ex){
                         if (LI != null)
@@ -212,7 +213,8 @@ namespace ClasesBiblioteca
                         // Se guarda la imagen en el buffer
                         picContraportada.Image.Save(mss, System.Drawing.Imaging.ImageFormat.Jpeg);
                         // Se extraen los bytes del buffer para asignarlos como valor para el  parámetro.
-                        Libro.ContraPortada = mss.GetBuffer();
+
+                        Libro.ContraPortada = imageToByteArray(resizeImage(picContraportada.Image, new Size(640, 480))); 
                     }
                     catch (Exception ex) {
                         if (LI != null) {
@@ -263,9 +265,14 @@ namespace ClasesBiblioteca
                     MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 }
-                
-            
-                ((CN.iForm)this).Nuevo();
+
+                if (aumentarlibro == false)
+                {
+                    ((CN.iForm)this).Nuevo();
+                }
+
+                aumentarlibro = false;
+
         }
 
         private bool Validar()
@@ -502,7 +509,7 @@ namespace ClasesBiblioteca
                 {
                     
                     posEtiqueta = Int32.Parse(conf.pos.Trim());
-                    numeEtiquetas = 25 - posEtiqueta;
+                    numeEtiquetas = 29 - posEtiqueta;
 
                    
 
@@ -511,7 +518,7 @@ namespace ClasesBiblioteca
                     try
                     {
 
-                        for (int i = 1; i < 25; i++)
+                        for (int i = 1; i < 29; i++)
                         {
                             reporte.SetParameterValue("picturePath" + i, @"C:\codigos\i.bmp");
                             reporte.SetParameterValue("etiqueta"+i, "");
@@ -525,7 +532,7 @@ namespace ClasesBiblioteca
                                 libb = (CN.Libro)codigos[i];
 
                                 reporte.SetParameterValue("picturePath" + posEtiqueta, @"C:\codigos\" + libb.Estante + libb.Pasillo + i + ".bmp");
-                                reporte.SetParameterValue("etiqueta" + posEtiqueta, "est-> "+libb.Estante+"/"+"pas-> " +libb.Pasillo);
+                                reporte.SetParameterValue("etiqueta" + posEtiqueta, "E: "+libb.Estante+"/"+"P: "+libb.Pasillo);
                                 posEtiqueta = posEtiqueta + 1;
                             }
                             catch (Exception ex) {
@@ -574,7 +581,8 @@ namespace ClasesBiblioteca
                 lib = (CN.Libro)codigo[i];
                 BarcodeLib.Barcode cod = new BarcodeLib.Barcode();
                 cod.IncludeLabel = true;
-                imgFinal = (Image)cod.Encode(BarcodeLib.TYPE.CODE128, lib.numero.ToString(), Color.Black, Color.White, 400, 100);
+                cod.Alignment = AlignmentPositions.CENTER;
+                imgFinal = (Image)cod.Encode(BarcodeLib.TYPE.CODE128, lib.numero.ToString(), Color.Black, Color.White, 340, 100);
                 String src = @"C:\codigos\" + lib.Estante + lib.Pasillo + i + ".bmp";
                 imgFinal.Save(src, ImageFormat.Bmp);
             }
@@ -584,18 +592,18 @@ namespace ClasesBiblioteca
 
         public void generacod()
         {
-
-            DataSet Dt = new DataSet();
-            DataTable dtb = new DataTable();
             codigos = new ArrayList();
-            
-            CN.LibroCol Libros = new CN.LibroCol();
-            CN.Libro LII;
-            Libros.Obtener();
-            foreach (CN.Libro Libro in Libros)
+           
+            foreach (DataGridViewRow row in dataLibros.Rows)
             {
-                
-                codigos.Add(Libro);
+
+                DataGridViewCheckBoxCell ck = row.Cells["imprimir"] as DataGridViewCheckBoxCell;
+                if (Convert.ToBoolean(ck.Value) || Convert.ToBoolean(ck.FormattedValue) || Convert.ToBoolean(ck.EditedFormattedValue))
+                {
+                    CN.Libro LIB = new CN.Libro();
+                   LIB.Obtener(Convert.ToInt32(row.Cells["id"].Value.ToString()));
+                   codigos.Add(LIB); 
+                }
 
             }
          
@@ -628,9 +636,14 @@ namespace ClasesBiblioteca
         {
             using (var ms = new MemoryStream())
             {
-                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                 return ms.ToArray();
             }
+        }
+
+        public Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
         }
 
         private void crearDirectorio()
@@ -1032,17 +1045,24 @@ namespace ClasesBiblioteca
 
         private void txtIsbn_Leave(object sender, EventArgs e)
         {
-           if(txtIsbn.Text.Trim() != ""){
+           
+            if(txtIsbn.Text.Trim() != ""){
                 CN.LibroCol Libros = new CN.LibroCol();
 
                 if (Libros.Obtener(txtIsbn.Text) > 0)
                 {
                     LI = Libros.ListarLibro();
                     llenarCampos(LI);
-                    DialogResult result = MessageBox.Show("Libro Existente desea aumentar el numero de ejemplares", "Confirmation", MessageBoxButtons.YesNoCancel);
-                    if (result == DialogResult.Yes)
+                   
+                    
+                    if (isbaumn.ShowDialog() == DialogResult.OK)
                     {
-                        ((CN.iForm)this).Guardar();
+                        int cant = Convert.ToInt32(isbaumn.cantidad.Trim());
+                        for (int i = 0; i < cant;i++ )
+                        {
+                            aumentarlibro = true;
+                            ((CN.iForm)this).Guardar();
+                        }
 
                     }
 
@@ -1052,6 +1072,7 @@ namespace ClasesBiblioteca
 
                 Libros = null;
              }
+
         }
 
         private void llenarCampos(CN.Libro[] LI)
@@ -1124,20 +1145,25 @@ namespace ClasesBiblioteca
 
         public int numeroLibros2(String titulo, int autor, int editorial)
         {
-
-            CN.LibroCol Libros = new CN.LibroCol();
-            CN.Libro[] LISTA;
-            int contador = 1;
-            if (Libros.Obtener(titulo,autor,editorial) > 0)
+            int cantidad;
+            try
             {
-                LISTA = Libros.ListarLibro();
-                contador = LISTA.Count();
+                String cons = "";
+                DtAdap = new SqlDataAdapter();
+                cons = "select count(*) as cantidad from BInvLibros where Titulo = '"+ titulo+"' and IdAutor = "+ autor+" and IdEditorial = " + editorial + " group by Titulo,IdAutor,IdEditorial";
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+                dtsParticip.Tables.Clear();
+                DtAdap.Fill(dtsParticip);
+                DtAdap = null;
+                //dttParticip = dtsParticip.Tables[0];
+                dataLibros.AutoGenerateColumns = false;
+                cantidad = int.Parse(dtsParticip.Tables[0].Rows[0].ItemArray[0].ToString());
+            }catch(Exception ex){
+                
+                cantidad = 0;
             }
-
-            LISTA = null;
-            Libros = null;
-            return contador;
-        
+            return cantidad;
+          
         }
 
         private void cmbAutor_Leave(object sender, EventArgs e)
@@ -1191,60 +1217,7 @@ namespace ClasesBiblioteca
             }
         }
 
-        private void cmbEditorial_Leave(object sender, EventArgs e)
-        {
-            try { comprobarExistencia(); }
-            catch (Exception ex)
-            {
-            }
-            if (cmbEditorial.Text.Trim() != "")
-            {
-                CN.EditorialCol col = new CN.EditorialCol();
-                if (col.Obtener(cmbEditorial.Text) > 0)
-                {
-                    
-                }
-                else
-                {
 
-                    DialogResult result = MessageBox.Show("La editorial no existe  desea agregarla", "Confirmation", MessageBoxButtons.YesNoCancel);
-                    if (result == DialogResult.Yes)
-                    {
-
-                        CN.Editorial aut = new CN.Editorial();
-                        aut.Nombre = cmbEditorial.Text;
-                        aut.Guardar();
-
-                        loEditorial = new CN.EditorialCol();
-                        loEditorial.Obtener();
-                        cmbEditorial.DisplayMember = "Nombre";
-                        cmbEditorial.ValueMember = "Id";
-                        cmbEditorial.DataSource = loEditorial;
-                        cmbEditorial.SelectedIndex = -1;
-
-                        string[] editorial;
-                        editorial = loEditorial.Listar();
-                        cmbEditorial.AutoCompleteCustomSource.AddRange(editorial.ToArray());
-                        cmbEditorial.AutoCompleteMode = AutoCompleteMode.Suggest;
-                        cmbEditorial.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                        cmbEditorial.Focus();
-
-
-                    }
-                    else
-                    {
-
-                        cmbEditorial.Text = "";
-                        cmbEditorial.SelectedIndex = -1;
-                        cmbEditorial.Focus();
-                    }
-
-
-
-                }
-            }
-
-        }
 
         private void cmbPais_Leave(object sender, EventArgs e)
         {
@@ -1475,7 +1448,9 @@ namespace ClasesBiblioteca
         }
 
         private void dataLibros_DoubleClick(object sender, EventArgs e)
-        {
+        {    
+
+
             Cursor = Cursors.WaitCursor;
             try
             {
@@ -1483,6 +1458,7 @@ namespace ClasesBiblioteca
                 {
                     Libro = new CN.Libro();
                     Libro.MensajeError += Evento_MensajeError;
+
                     if (Libro.Obtener(Convert.ToInt32(dataLibros.SelectedRows[0].Cells[0].Value)))
                     {
 
@@ -1555,6 +1531,8 @@ namespace ClasesBiblioteca
                         }
 
                     }
+                   
+
                 }
             }
             catch (Exception ex)
@@ -1573,12 +1551,87 @@ namespace ClasesBiblioteca
 
         private void btnAumentar_Click(object sender, EventArgs e)
         {
+
+
+            if (isbaumn.ShowDialog() == DialogResult.OK)
+            { 
+                
+                int cant = Convert.ToInt32(isbaumn.cantidad.Trim());
+                for (int i = 0; i < cant; i++)
+                {
+                    aumentarlibro = true;
+                    ((CN.iForm)this).Guardar();
+                }
+
+            }
+         
+                ((CN.iForm)this).Nuevo();
             
-                 aumentarlibro = true;
-                ((CN.iForm)this).Guardar();
             
 
         }
+
+        private void cmbEditorial_Leave_1(object sender, EventArgs e)
+        {
+            try { comprobarExistencia(); }
+            catch (Exception ex)
+            {
+            }
+            try { comprobarExistencia(); }
+            catch (Exception ex)
+            {
+            }
+            if (cmbEditorial.Text.Trim() != "")
+            {
+                CN.EditorialCol col = new CN.EditorialCol();
+                if (col.Obtener(cmbEditorial.Text) > 0)
+                {
+
+                }
+                else
+                {
+
+                    DialogResult result = MessageBox.Show("La editorial no existe  desea agregarla", "Confirmation", MessageBoxButtons.YesNoCancel);
+                    if (result == DialogResult.Yes)
+                    {
+
+                        CN.Editorial aut = new CN.Editorial();
+                        aut.Nombre = cmbEditorial.Text;
+                        aut.Guardar();
+
+                        loEditorial = new CN.EditorialCol();
+                        loEditorial.Obtener();
+                        cmbEditorial.DisplayMember = "Nombre";
+                        cmbEditorial.ValueMember = "Id";
+                        cmbEditorial.DataSource = loEditorial;
+                        cmbEditorial.SelectedIndex = -1;
+
+                        string[] editorial;
+                        editorial = loEditorial.Listar();
+                        cmbEditorial.AutoCompleteCustomSource.AddRange(editorial.ToArray());
+                        cmbEditorial.AutoCompleteMode = AutoCompleteMode.Suggest;
+                        cmbEditorial.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                        cmbEditorial.Focus();
+
+
+                    }
+                    else
+                    {
+
+                        cmbEditorial.Text = "";
+                        cmbEditorial.SelectedIndex = -1;
+                        cmbEditorial.Focus();
+                    }
+
+
+
+                }
+            }
+
+
+        }
+
+
 
 
 

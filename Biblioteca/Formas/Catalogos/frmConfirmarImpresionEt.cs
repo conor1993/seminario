@@ -32,6 +32,7 @@ namespace ClasesBiblioteca.Formas.Catalogos
 
             DialogResult = DialogResult.OK;
             this.Close();
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

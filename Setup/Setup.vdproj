@@ -1057,7 +1057,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ORMDiocesis, Version=1.0.6215.30812, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ORMDiocesis, Version=1.0.6232.22078, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_8D1FF5106C0A8C7A90F82E883EA9D7D4"
@@ -1182,15 +1182,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Seminario"
-        "ProductCode" = "8:{1AC5750C-C112-46E7-B1E3-2CAB106CEE3B}"
-        "PackageCode" = "8:{D4763A80-0719-422E-A076-A71B36C38F83}"
+        "ProductCode" = "8:{6AD3ACF9-EB16-4EAE-B8C7-6A1500E5DFD6}"
+        "PackageCode" = "8:{D7DEDA2E-107D-4F99-BB48-5A3FAEFBA131}"
         "UpgradeCode" = "8:{78FD4ECC-536A-4364-BF23-4C629CC3D4DE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:10.00.17"
+        "ProductVersion" = "8:10.00.19"
         "Manufacturer" = "8:Integra-Lab"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

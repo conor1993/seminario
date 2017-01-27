@@ -86,7 +86,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits AsistenciaEntity's mappings</summary>
 		private void InitAsistenciaEntityMappings()
 		{
-			base.AddElementMapping( "AsistenciaEntity", "bdsemprovoc", @"dbo", "SemAsistencia", 15 );
+			base.AddElementMapping( "AsistenciaEntity", "", @"dbo", "SemAsistencia", 15 );
 			base.AddElementFieldMapping( "AsistenciaEntity", "IdParticipante", "IdParticipante", false, (int)SqlDbType.Int, 0, 0, 10, false, "", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "AsistenciaEntity", "IdEvento", "IdEvento", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "AsistenciaEntity", "Domicilio", "Domicilio", true, (int)SqlDbType.VarChar, 100, 0, 0, false, "", null, typeof(System.String), 2 );
@@ -106,7 +106,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits AutorEntity's mappings</summary>
 		private void InitAutorEntityMappings()
 		{
-			base.AddElementMapping( "AutorEntity", "bdsemprovoc", @"dbo", "BCatAutores", 3 );
+			base.AddElementMapping( "AutorEntity", "", @"dbo", "BCatAutores", 3 );
 			base.AddElementFieldMapping( "AutorEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "AutorEntity", "Nombre", "Nombre", false, (int)SqlDbType.VarChar, 500, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "AutorEntity", "IdPais", "IdPais", true, (int)SqlDbType.Int, 0, 0, 10, false, "", null, typeof(System.Int32), 2 );
@@ -114,35 +114,35 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits CargoEntity's mappings</summary>
 		private void InitCargoEntityMappings()
 		{
-			base.AddElementMapping( "CargoEntity", "bdsemprovoc", @"dbo", "CatCargo", 2 );
+			base.AddElementMapping( "CargoEntity", "", @"dbo", "CatCargo", 2 );
 			base.AddElementFieldMapping( "CargoEntity", "Id", "id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "CargoEntity", "Cargo", "Cargo", true, (int)SqlDbType.VarChar, 250, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits CiudadEntity's mappings</summary>
 		private void InitCiudadEntityMappings()
 		{
-			base.AddElementMapping( "CiudadEntity", "bdsemprovoc", @"dbo", "CatCiudades", 2 );
+			base.AddElementMapping( "CiudadEntity", "", @"dbo", "CatCiudades", 2 );
 			base.AddElementFieldMapping( "CiudadEntity", "Id", "Idciudad", false, (int)SqlDbType.TinyInt, 0, 0, 3, true, "SCOPE_IDENTITY()", null, typeof(System.Byte), 0 );
 			base.AddElementFieldMapping( "CiudadEntity", "Nombre", "Nomciudad", false, (int)SqlDbType.VarChar, 100, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits CiudadesEntity's mappings</summary>
 		private void InitCiudadesEntityMappings()
 		{
-			base.AddElementMapping( "CiudadesEntity", "bdsemprovoc", @"dbo", "Ciudades", 2 );
+			base.AddElementMapping( "CiudadesEntity", "", @"dbo", "Ciudades", 2 );
 			base.AddElementFieldMapping( "CiudadesEntity", "Nomciudad", "Nomciudad", false, (int)SqlDbType.VarChar, 100, 0, 0, false, "", null, typeof(System.String), 0 );
 			base.AddElementFieldMapping( "CiudadesEntity", "Idciudad", "Idciudad", false, (int)SqlDbType.TinyInt, 0, 0, 3, false, "", null, typeof(System.Byte), 1 );
 		}
 		/// <summary>Inits EditorialEntity's mappings</summary>
 		private void InitEditorialEntityMappings()
 		{
-			base.AddElementMapping( "EditorialEntity", "bdsemprovoc", @"dbo", "BCatEditoriales", 2 );
+			base.AddElementMapping( "EditorialEntity", "", @"dbo", "BCatEditoriales", 2 );
 			base.AddElementFieldMapping( "EditorialEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "EditorialEntity", "Nombre", "Nombre", false, (int)SqlDbType.VarChar, 500, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits EquipoDeTrabajoEntity's mappings</summary>
 		private void InitEquipoDeTrabajoEntityMappings()
 		{
-			base.AddElementMapping( "EquipoDeTrabajoEntity", "bdsemprovoc", @"dbo", "CatEquiposTrabajo", 4 );
+			base.AddElementMapping( "EquipoDeTrabajoEntity", "", @"dbo", "CatEquiposTrabajo", 4 );
 			base.AddElementFieldMapping( "EquipoDeTrabajoEntity", "Id", "Idequipo", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "EquipoDeTrabajoEntity", "IdEvento", "Idevento", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "EquipoDeTrabajoEntity", "Nombre", "Nombreequipo", false, (int)SqlDbType.VarChar, 100, 0, 0, false, "", null, typeof(System.String), 2 );
@@ -151,7 +151,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits EventoEntity's mappings</summary>
 		private void InitEventoEntityMappings()
 		{
-			base.AddElementMapping( "EventoEntity", "bdsemprovoc", @"dbo", "CatEventos", 8 );
+			base.AddElementMapping( "EventoEntity", "", @"dbo", "CatEventos", 8 );
 			base.AddElementFieldMapping( "EventoEntity", "Id", "Idevento", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 0 );
 			base.AddElementFieldMapping( "EventoEntity", "Ano", "Yearevento", false, (int)SqlDbType.Int, 0, 0, 10, false, "", null, typeof(System.Int32), 1 );
 			base.AddElementFieldMapping( "EventoEntity", "FechaInicio", "Fecinievento", false, (int)SqlDbType.SmallDateTime, 0, 0, 0, false, "", null, typeof(System.DateTime), 2 );
@@ -164,7 +164,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits LectoresEntity's mappings</summary>
 		private void InitLectoresEntityMappings()
 		{
-			base.AddElementMapping( "LectoresEntity", "bdsemprovoc", @"dbo", "BCatLectores", 29 );
+			base.AddElementMapping( "LectoresEntity", "", @"dbo", "BCatLectores", 29 );
 			base.AddElementFieldMapping( "LectoresEntity", "IdLectores", "IdLectores", false, (int)SqlDbType.Int, 0, 0, 10, false, "", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "LectoresEntity", "Matricula", "matricula", true, (int)SqlDbType.VarChar, 255, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "LectoresEntity", "Nombre", "nombre", true, (int)SqlDbType.VarChar, 255, 0, 0, false, "", null, typeof(System.String), 2 );
@@ -198,7 +198,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits LibroEntity's mappings</summary>
 		private void InitLibroEntityMappings()
 		{
-			base.AddElementMapping( "LibroEntity", "bdsemprovoc", @"dbo", "BInvLibros", 26 );
+			base.AddElementMapping( "LibroEntity", "", @"dbo", "BInvLibros", 26 );
 			base.AddElementFieldMapping( "LibroEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "LibroEntity", "Titulo", "Titulo", false, (int)SqlDbType.VarChar, 250, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "LibroEntity", "IdAutor", "IdAutor", false, (int)SqlDbType.Int, 0, 0, 10, false, "", null, typeof(System.Int32), 2 );
@@ -229,28 +229,28 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits LibroEstatusEntity's mappings</summary>
 		private void InitLibroEstatusEntityMappings()
 		{
-			base.AddElementMapping( "LibroEstatusEntity", "bdsemprovoc", @"dbo", "BCatEstatus", 2 );
+			base.AddElementMapping( "LibroEstatusEntity", "", @"dbo", "BCatEstatus", 2 );
 			base.AddElementFieldMapping( "LibroEstatusEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "LibroEstatusEntity", "Estado", "Estado", true, (int)SqlDbType.VarChar, 100, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits LibroFormatoEntity's mappings</summary>
 		private void InitLibroFormatoEntityMappings()
 		{
-			base.AddElementMapping( "LibroFormatoEntity", "bdsemprovoc", @"dbo", "BCatFormato", 2 );
+			base.AddElementMapping( "LibroFormatoEntity", "", @"dbo", "BCatFormato", 2 );
 			base.AddElementFieldMapping( "LibroFormatoEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "LibroFormatoEntity", "Formato", "Formato", true, (int)SqlDbType.VarChar, 100, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits PaisEntity's mappings</summary>
 		private void InitPaisEntityMappings()
 		{
-			base.AddElementMapping( "PaisEntity", "bdsemprovoc", @"dbo", "CatPaises", 2 );
+			base.AddElementMapping( "PaisEntity", "", @"dbo", "CatPaises", 2 );
 			base.AddElementFieldMapping( "PaisEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "PaisEntity", "Nombre", "Nombre", false, (int)SqlDbType.VarChar, 30, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits ParrocoEntity's mappings</summary>
 		private void InitParrocoEntityMappings()
 		{
-			base.AddElementMapping( "ParrocoEntity", "bdsemprovoc", @"dbo", "CatParrocos", 15 );
+			base.AddElementMapping( "ParrocoEntity", "", @"dbo", "CatParrocos", 15 );
 			base.AddElementFieldMapping( "ParrocoEntity", "Id", "IdParroco", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "ParrocoEntity", "Titulo", "Titulo", true, (int)SqlDbType.NVarChar, 30, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "ParrocoEntity", "Nombre", "NomParroco", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 2 );
@@ -270,7 +270,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits ParroquiaEntity's mappings</summary>
 		private void InitParroquiaEntityMappings()
 		{
-			base.AddElementMapping( "ParroquiaEntity", "bdsemprovoc", @"dbo", "CatParroquias", 15 );
+			base.AddElementMapping( "ParroquiaEntity", "", @"dbo", "CatParroquias", 15 );
 			base.AddElementFieldMapping( "ParroquiaEntity", "Id", "Idparroquia", false, (int)SqlDbType.Int, 0, 0, 10, false, "", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "ParroquiaEntity", "IdTipoParroquia", "Idtipoparr", false, (int)SqlDbType.TinyInt, 0, 0, 3, false, "", null, typeof(System.Byte), 1 );
 			base.AddElementFieldMapping( "ParroquiaEntity", "Nombre", "Nomparr", false, (int)SqlDbType.VarChar, 255, 0, 0, false, "", null, typeof(System.String), 2 );
@@ -290,7 +290,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits ParticipanteEntity's mappings</summary>
 		private void InitParticipanteEntityMappings()
 		{
-			base.AddElementMapping( "ParticipanteEntity", "bdsemprovoc", @"dbo", "CatParticipantes", 18 );
+			base.AddElementMapping( "ParticipanteEntity", "", @"dbo", "CatParticipantes", 18 );
 			base.AddElementFieldMapping( "ParticipanteEntity", "Id", "IdParticipante", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "ParticipanteEntity", "ApellidoPaterno", "ApellidoPaterno", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "ParticipanteEntity", "ApellidoMaterno", "ApellidoMaterno", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 2 );
@@ -313,35 +313,35 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits RamaEntity's mappings</summary>
 		private void InitRamaEntityMappings()
 		{
-			base.AddElementMapping( "RamaEntity", "bdsemprovoc", @"dbo", "BCatRamas", 2 );
+			base.AddElementMapping( "RamaEntity", "", @"dbo", "BCatRamas", 2 );
 			base.AddElementFieldMapping( "RamaEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "RamaEntity", "Nombre", "Nombre", false, (int)SqlDbType.VarChar, 500, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits SeccionEntity's mappings</summary>
 		private void InitSeccionEntityMappings()
 		{
-			base.AddElementMapping( "SeccionEntity", "bdsemprovoc", @"dbo", "BCatSecciones", 2 );
+			base.AddElementMapping( "SeccionEntity", "", @"dbo", "BCatSecciones", 2 );
 			base.AddElementFieldMapping( "SeccionEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "SeccionEntity", "Nombre", "Nombre", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits TematicaEntity's mappings</summary>
 		private void InitTematicaEntityMappings()
 		{
-			base.AddElementMapping( "TematicaEntity", "bdsemprovoc", @"dbo", "BCatTematicas", 2 );
+			base.AddElementMapping( "TematicaEntity", "", @"dbo", "BCatTematicas", 2 );
 			base.AddElementFieldMapping( "TematicaEntity", "Id", "Id", false, (int)SqlDbType.Int, 0, 0, 10, true, "SCOPE_IDENTITY()", null, typeof(System.Int32), 0 );
 			base.AddElementFieldMapping( "TematicaEntity", "Nombre", "Nombre", false, (int)SqlDbType.VarChar, 500, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits TipoParroquiaEntity's mappings</summary>
 		private void InitTipoParroquiaEntityMappings()
 		{
-			base.AddElementMapping( "TipoParroquiaEntity", "bdsemprovoc", @"dbo", "CatTipoParroquia", 2 );
+			base.AddElementMapping( "TipoParroquiaEntity", "", @"dbo", "CatTipoParroquia", 2 );
 			base.AddElementFieldMapping( "TipoParroquiaEntity", "Id", "Idtipoparr", false, (int)SqlDbType.TinyInt, 0, 0, 3, true, "SCOPE_IDENTITY()", null, typeof(System.Byte), 0 );
 			base.AddElementFieldMapping( "TipoParroquiaEntity", "Descripcion", "Desctipoparr", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 1 );
 		}
 		/// <summary>Inits VwListasEntity's mappings</summary>
 		private void InitVwListasEntityMappings()
 		{
-			base.AddElementMapping( "VwListasEntity", "bdsemprovoc", @"dbo", "VwListas", 6 );
+			base.AddElementMapping( "VwListasEntity", "", @"dbo", "VwListas", 6 );
 			base.AddElementFieldMapping( "VwListasEntity", "Nombreequipo", "Nombreequipo", false, (int)SqlDbType.VarChar, 100, 0, 0, false, "", null, typeof(System.String), 0 );
 			base.AddElementFieldMapping( "VwListasEntity", "Nombreevento", "Nombreevento", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "VwListasEntity", "ApellidoPaterno", "ApellidoPaterno", false, (int)SqlDbType.VarChar, 50, 0, 0, false, "", null, typeof(System.String), 2 );
@@ -352,7 +352,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits VwparroquiasEntity's mappings</summary>
 		private void InitVwparroquiasEntityMappings()
 		{
-			base.AddElementMapping( "VwparroquiasEntity", "bdsemprovoc", @"dbo", "Vwparroquias", 14 );
+			base.AddElementMapping( "VwparroquiasEntity", "", @"dbo", "Vwparroquias", 14 );
 			base.AddElementFieldMapping( "VwparroquiasEntity", "Parroquia", "Parroquia", false, (int)SqlDbType.VarChar, 255, 0, 0, false, "", null, typeof(System.String), 0 );
 			base.AddElementFieldMapping( "VwparroquiasEntity", "Telefono", "Telefono", false, (int)SqlDbType.VarChar, 255, 0, 0, false, "", null, typeof(System.String), 1 );
 			base.AddElementFieldMapping( "VwparroquiasEntity", "OtroTelefono", "Otro Telefono", false, (int)SqlDbType.VarChar, 255, 0, 0, false, "", null, typeof(System.String), 2 );
@@ -371,7 +371,7 @@ namespace ORMDiocesis.HelperClasses
 		/// <summary>Inits ZonaPastoralEntity's mappings</summary>
 		private void InitZonaPastoralEntityMappings()
 		{
-			base.AddElementMapping( "ZonaPastoralEntity", "bdsemprovoc", @"dbo", "CatZonaPastoral", 2 );
+			base.AddElementMapping( "ZonaPastoralEntity", "", @"dbo", "CatZonaPastoral", 2 );
 			base.AddElementFieldMapping( "ZonaPastoralEntity", "Id", "Idzonapastoral", false, (int)SqlDbType.TinyInt, 0, 0, 3, true, "SCOPE_IDENTITY()", null, typeof(System.Byte), 0 );
 			base.AddElementFieldMapping( "ZonaPastoralEntity", "Nombre", "Nomzonapastoral", false, (int)SqlDbType.VarChar, 100, 0, 0, false, "", null, typeof(System.String), 1 );
 		}

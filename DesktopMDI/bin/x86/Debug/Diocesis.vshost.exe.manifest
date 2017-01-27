@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="Diocesis.exe" version="1.0.0.17" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
+  <asmv1:assemblyIdentity name="Diocesis.exe" version="1.0.0.20" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
   <description asmv2:iconFile="Resources\seminario.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -170,14 +170,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasesBiblioteca.dll" size="3077120">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasesBiblioteca.dll" size="3534848">
       <assemblyIdentity name="ClasesBiblioteca" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Gd+VdJt9qaTVwA8gbTiTHSajAsE=</dsig:DigestValue>
+        <dsig:DigestValue>3ZfdlCLA9rPWvwgoylcicdt8Bcc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -189,7 +189,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>PPen6Rb6JuRP0eUZnzf5MNwrg0I=</dsig:DigestValue>
+        <dsig:DigestValue>cYBbcy6kXalc2COGdAXgwJnguPk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -201,7 +201,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>x4HtYVeXUFDgcHlZyoyliuTQQW8=</dsig:DigestValue>
+        <dsig:DigestValue>NKmmG3wlnUQbu+p/vC/0i25u8Uw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -225,7 +225,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>pgVmjTIbWDg53qy6QXAYRfcYTNI=</dsig:DigestValue>
+        <dsig:DigestValue>DtmIWdMo8ujw76/us2yc4VN8ZZE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -279,13 +279,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ORMDiocesis.dll" size="446464">
-      <assemblyIdentity name="ORMDiocesis" version="1.0.6215.30812" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="ORMDiocesis" version="1.0.6232.22078" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>9XVe6eOgvWIlWv4N6xyeB5jMNUg=</dsig:DigestValue>
+        <dsig:DigestValue>G/NPcmlZmntAxuounpqW6+hxn2g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
