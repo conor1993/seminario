@@ -566,90 +566,98 @@ namespace ClasesSorteo
             }
         }
 
-        private void dgvBienechores_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvBienechores_DoubleClick(object sender, EventArgs e)
         {
-                limpiar();
-                DtAdap = new SqlDataAdapter();
-                DataSet dtseqp = new DataSet();
-   
-                try
+            limpiar();
+            DtAdap = new SqlDataAdapter();
+            DataSet dtseqp = new DataSet();
+
+            try
+            {
+                if (CN.DBU.Cnn.State == ConnectionState.Closed)
+                    CN.DBU.Cnn.Open();
+
+                String id = dgvBienechores.SelectedRows[0].Cells[0].Value.ToString();
+
+
+                String cons = "select bnc.id, bnc.nombre ,bnc.apellidoPaterno,bnc.apellidoMaterno, bnc.equipo,bnc.cumpleAños,bnc.domicilio,bnc.telefono,bnc.celular,bnc.recibo,bnc.tarjeta,apt.aportacion,rec.RazonSocial,rec.domicilio,rec.rfc,rec.telefono,trj.idTipotargeta,trj.idBanco,trj.noTargeta,trj.fechaexpiracion,trj.codigoSeguridad,trj.claveTargeta  from "
+                               + " SortAportaciones as apt "
+                                + " join SortBienechores as bnc on apt.id_bienechor = bnc.id "
+                                + " left join SortTtargeta as trj on bnc.id = trj.idBienechor "
+                                + " left join SortReciboImpuesto as rec on rec.idBienechores = trj.idBienechor "
+                                + " where apt.id_bienechor =" + id;
+
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+
+
+                DtAdap.Fill(dtseqp);
+                DtAdap = null;
+
+                //mostrar paneles ocultos
+                txtidbienechores.Text = dtseqp.Tables[0].Rows[0].ItemArray[0].ToString();
+                txtNombre.Text = dtseqp.Tables[0].Rows[0].ItemArray[1].ToString();
+                txtapellidoPaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[2].ToString();
+                txtapellidoMaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[3].ToString();
+                cmbequipo.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[4];
+                dtmcumple.Value = (System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[5];
+                txtdomicilio.Text = dtseqp.Tables[0].Rows[0].ItemArray[6].ToString();
+                txtTelefono.Text = dtseqp.Tables[0].Rows[0].ItemArray[7].ToString();
+                txtClular.Text = dtseqp.Tables[0].Rows[0].ItemArray[8].ToString();
+                txtOtracantidad.Text = dtseqp.Tables[0].Rows[0].ItemArray[11].ToString();
+                //si selecciono recibo igual a si
+                if (Convert.ToInt32(dtseqp.Tables[0].Rows[0].ItemArray[9]) == 1)
                 {
-                    if (CN.DBU.Cnn.State == ConnectionState.Closed)
-                        CN.DBU.Cnn.Open();
-
-                    String id = dgvBienechores.SelectedRows[0].Cells[0].Value.ToString();
-                    String cons = " select *  from SortBienechores as biene join SortAportaciones as aport on aport.id_bienechor = biene.id "
-                                 + " join SortReciboImpuesto as recibo on recibo.idBienechores = aport.id_bienechor where biene.id =" + id;
-
-                    DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
-
-
-                    DtAdap.Fill(dtseqp);
-                    DtAdap = null;
-
-                    //mostrar paneles ocultos
-                    txtidbienechores.Text = dtseqp.Tables[0].Rows[0].ItemArray[0].ToString();
-                    txtNombre.Text = dtseqp.Tables[0].Rows[0].ItemArray[1].ToString();
-                    txtapellidoPaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[2].ToString();
-                    txtapellidoMaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[3].ToString();
-                    cmbequipo.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[4];
-                    dtmcumple.Value = (System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[5];
-                    txtdomicilio.Text = dtseqp.Tables[0].Rows[0].ItemArray[6].ToString();
-                    txtTelefono.Text = dtseqp.Tables[0].Rows[0].ItemArray[7].ToString();
-                    txtClular.Text = dtseqp.Tables[0].Rows[0].ItemArray[8].ToString();
-                    txtOtracantidad.Text = dtseqp.Tables[0].Rows[0].ItemArray[13].ToString(); 
-                        //si selecciono recibo igual a si
-                    if (Convert.ToInt32(dtseqp.Tables[0].Rows[0].ItemArray[9]) == 1)
-                      { 
-                        rdtsi.Checked = true;
-                        gpxRecibos.Visible = true;
-                        gpxAportacion.Location = new Point(12, 331);
-                        dgvBienechores.Location = new Point(18, 500);
-                        txtrazonSocial.Text = dtseqp.Tables[0].Rows[0].ItemArray[23].ToString();
-                        txtdomicilioFiscal.Text = dtseqp.Tables[0].Rows[0].ItemArray[24].ToString();
-                        txtrfc.Text = dtseqp.Tables[0].Rows[0].ItemArray[25].ToString();
-                        txttelefonoimpuesto.Text = dtseqp.Tables[0].Rows[0].ItemArray[26].ToString();
-
-                      } else 
-                          {
-                              gpxRecibos.Visible = false;
-                              gpxAportacion.Location = new Point(12, 218);
-                              gpxAportacion.Size = new System.Drawing.Size(854, 100);
-                              dgvBienechores.Location = new Point(18, 350);
-                              rdtno.Checked = true;
-                          }
-
-                    if (Convert.ToInt32(dtseqp.Tables[0].Rows[0].ItemArray[10]) == 1) {
-
-                        radtarjeta.Checked = true;
-                        gpxTarjeta.Visible = true;
-                        gpxAportacion.Size = new System.Drawing.Size(854, 271);
-
-                        if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 500); }
-                        if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 639); }
-
-                        cmbtarjeta.SelectedValue = Convert.ToUInt32(dtseqp.Tables[0].Rows[0].ItemArray[14]);
-                        cmbBanco.SelectedValue = Convert.ToUInt32(dtseqp.Tables[0].Rows[0].ItemArray[15]);
-                        txtNotarjeta.Text = dtseqp.Tables[0].Rows[0].ItemArray[16].ToString();
-                        dtmExpiracion.Value = (System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[17];
-                        txtcodseguridad.Text = dtseqp.Tables[0].Rows[0].ItemArray[19].ToString();
-                        txtclave.Text = dtseqp.Tables[0].Rows[0].ItemArray[19].ToString();
-
-                    }
-
-
-
-                    CN.DBU.Cnn.Close();
+                    rdtsi.Checked = true;
+                    gpxRecibos.Visible = true;
+                    gpxAportacion.Location = new Point(12, 331);
+                    dgvBienechores.Location = new Point(18, 500);
+                    txtrazonSocial.Text = dtseqp.Tables[0].Rows[0].ItemArray[12].ToString();
+                    txtdomicilioFiscal.Text = dtseqp.Tables[0].Rows[0].ItemArray[13].ToString();
+                    txtrfc.Text = dtseqp.Tables[0].Rows[0].ItemArray[14].ToString();
+                    txttelefonoimpuesto.Text = dtseqp.Tables[0].Rows[0].ItemArray[15].ToString();
 
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    gpxRecibos.Visible = false;
+                    gpxAportacion.Location = new Point(12, 218);
+                    gpxAportacion.Size = new System.Drawing.Size(854, 100);
+                    dgvBienechores.Location = new Point(18, 350);
+                    rdtno.Checked = true;
                 }
 
-            
+                if (Convert.ToInt32(dtseqp.Tables[0].Rows[0].ItemArray[10]) == 1)
+                {
+
+                    radtarjeta.Checked = true;
+                    gpxTarjeta.Visible = true;
+                    gpxAportacion.Size = new System.Drawing.Size(854, 271);
+
+                    if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 500); }
+                    if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 639); }
+                    cmbtarjeta.SelectedValue = Convert.ToUInt32(dtseqp.Tables[0].Rows[0].ItemArray[16]);
+                    cmbBanco.SelectedValue = Convert.ToUInt32(dtseqp.Tables[0].Rows[0].ItemArray[17]);
+                    txtNotarjeta.Text = dtseqp.Tables[0].Rows[0].ItemArray[18].ToString();
+                    dtmExpiracion.Value = (System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[19];
+                    txtcodseguridad.Text = dtseqp.Tables[0].Rows[0].ItemArray[20].ToString();
+                    txtclave.Text = dtseqp.Tables[0].Rows[0].ItemArray[21].ToString();
+
+                }
+
+
+
+                CN.DBU.Cnn.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
+
+
+   
 
 
 

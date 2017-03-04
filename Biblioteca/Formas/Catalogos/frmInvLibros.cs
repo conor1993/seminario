@@ -89,10 +89,15 @@ namespace ClasesBiblioteca
         void CN.iForm.Guardar()
         {
 
+         
+            
             if (aumentarlibro == true) {
+                MessageBox.Show("if");
                 CN.LibroCol Libros = new CN.LibroCol();
-                if (txtIsbn.Text.Trim() != null)
+              
+                if (txtIsbn.Text.Trim() != "")
                 {
+                  
                      if (Libros.Obtener(txtIsbn.Text) > 0)
                      {
                          LI = Libros.ListarLibro();
@@ -100,13 +105,18 @@ namespace ClasesBiblioteca
 
                 }
                 else {
+                    
                     if (Libros.Obtener(txtTitulo.Text, Convert.ToInt32(cmbAutor.SelectedValue), Convert.ToInt32(cmbEditorial.SelectedValue)) > 0)
                     {
                         LI = Libros.ListarLibro();
+                        
                     }
+                   
                 }
                 Libro = null;
             }
+
+           
 
 
             DialogResult result;
@@ -169,10 +179,13 @@ namespace ClasesBiblioteca
                     else
                     {
 
-                        int cont;
+                        int cont=0;
                         if (LI != null)
                         {
-                            cont = LI.Count() + 1;
+                            cont = LI.Count();
+                            cont=cont+1;
+                           
+                            
                         }
                         else {
                             cont = 1; 
@@ -509,16 +522,17 @@ namespace ClasesBiblioteca
                 {
                     
                     posEtiqueta = Int32.Parse(conf.pos.Trim());
-                    numeEtiquetas = 29 - posEtiqueta;
+                    numeEtiquetas = 25 - posEtiqueta;
 
                    
 
                     String tit = txtTitulo.Text;
-                    r.listaEtiquetas reporte = new r.listaEtiquetas();
+                    r.listaEtiquetas tusk = new r.listaEtiquetas();
+                    r.listaEtiquetastusk reporte = new listaEtiquetastusk();
                     try
                     {
 
-                        for (int i = 1; i < 29; i++)
+                        for (int i = 1; i < 25; i++)
                         {
                             reporte.SetParameterValue("picturePath" + i, @"C:\codigos\i.bmp");
                             reporte.SetParameterValue("etiqueta"+i, "");
@@ -532,7 +546,7 @@ namespace ClasesBiblioteca
                                 libb = (CN.Libro)codigos[i];
 
                                 reporte.SetParameterValue("picturePath" + posEtiqueta, @"C:\codigos\" + libb.Estante + libb.Pasillo + i + ".bmp");
-                                reporte.SetParameterValue("etiqueta" + posEtiqueta, "E: "+libb.Estante+"/"+"P: "+libb.Pasillo);
+                                reporte.SetParameterValue("etiqueta" + posEtiqueta, "E:"+libb.Estante+"/"+"P:"+libb.Pasillo+"/"+"N:"+libb.Nivel+" "+libb.ISBN+"\n"+libb.Titulo);
                                 posEtiqueta = posEtiqueta + 1;
                             }
                             catch (Exception ex) {
@@ -574,6 +588,7 @@ namespace ClasesBiblioteca
 
         private void codigoBarras(ArrayList codigo)
         {
+
             Image imgFinal;
             CN.Libro lib;
             for (int i = 0; i < codigo.Count; i++) {
@@ -582,6 +597,7 @@ namespace ClasesBiblioteca
                 BarcodeLib.Barcode cod = new BarcodeLib.Barcode();
                 cod.IncludeLabel = true;
                 cod.Alignment = AlignmentPositions.CENTER;
+               
                 imgFinal = (Image)cod.Encode(BarcodeLib.TYPE.CODE128, lib.numero.ToString(), Color.Black, Color.White, 340, 100);
                 String src = @"C:\codigos\" + lib.Estante + lib.Pasillo + i + ".bmp";
                 imgFinal.Save(src, ImageFormat.Bmp);
@@ -725,7 +741,6 @@ namespace ClasesBiblioteca
                 cmbEditorial.ValueMember = "Id";
                 cmbEditorial.DataSource = loEditorial;
                 cmbEditorial.SelectedIndex = -1;
-
                 string[] editorial;
                 editorial = loEditorial.Listar();
                 cmbEditorial.AutoCompleteCustomSource.AddRange(editorial.ToArray());

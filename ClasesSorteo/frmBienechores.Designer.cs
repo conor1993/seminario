@@ -34,6 +34,7 @@
             this.cmbequipo = new System.Windows.Forms.ComboBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtidbienechores = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rdtno = new System.Windows.Forms.RadioButton();
             this.rdtsi = new System.Windows.Forms.RadioButton();
@@ -87,7 +88,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.dgvBienechores = new System.Windows.Forms.DataGridView();
-            this.txtidbienechores = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gpxRecibos.SuspendLayout();
@@ -169,6 +169,19 @@
             this.groupBox3.TabIndex = 65;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos";
+            // 
+            // txtidbienechores
+            // 
+            this.txtidbienechores.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtidbienechores.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtidbienechores.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.txtidbienechores.Location = new System.Drawing.Point(67, 25);
+            this.txtidbienechores.MaxLength = 50;
+            this.txtidbienechores.Name = "txtidbienechores";
+            this.txtidbienechores.Size = new System.Drawing.Size(46, 21);
+            this.txtidbienechores.TabIndex = 46;
+            this.txtidbienechores.Visible = false;
             // 
             // groupBox2
             // 
@@ -794,20 +807,7 @@
             this.dgvBienechores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBienechores.Size = new System.Drawing.Size(838, 111);
             this.dgvBienechores.TabIndex = 68;
-            this.dgvBienechores.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBienechores_CellDoubleClick);
-            // 
-            // txtidbienechores
-            // 
-            this.txtidbienechores.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtidbienechores.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtidbienechores.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.txtidbienechores.Location = new System.Drawing.Point(67, 25);
-            this.txtidbienechores.MaxLength = 50;
-            this.txtidbienechores.Name = "txtidbienechores";
-            this.txtidbienechores.Size = new System.Drawing.Size(46, 21);
-            this.txtidbienechores.TabIndex = 46;
-            this.txtidbienechores.Visible = false;
+            this.dgvBienechores.DoubleClick += new System.EventHandler(this.dgvBienechores_DoubleClick);
             // 
             // frmBienechores
             // 
