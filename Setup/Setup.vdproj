@@ -1183,7 +1183,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Seminario"
         "ProductCode" = "8:{4F2686C0-85B0-4A88-BB84-72209DBD9BC5}"
-        "PackageCode" = "8:{75761D53-5AEA-4EB0-8CBA-D7D65DBCDA74}"
+        "PackageCode" = "8:{DBE138D0-0015-46EA-A0AA-72D1812837F7}"
         "UpgradeCode" = "8:{78FD4ECC-536A-4364-BF23-4C629CC3D4DE}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

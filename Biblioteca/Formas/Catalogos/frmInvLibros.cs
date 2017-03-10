@@ -504,7 +504,8 @@ namespace ClasesBiblioteca
 
         void CN.iForm.Imprimir()
         {   
-
+            int lim ;
+            String isbnet="";
             CN.Libro libb; 
             crearDirectorio();
             generacod();
@@ -538,15 +539,23 @@ namespace ClasesBiblioteca
                             reporte.SetParameterValue("etiqueta"+i, "");
                         }
 
-                        
+                                
                         for (int i = k; i < numeEtiquetas + k ; i++)
                         {
                             try
                             {
                                 libb = (CN.Libro)codigos[i];
+                                lim = libb.numero.ToString().Length;
+                                lim = lim - 1;
+                                if (libb.ISBN.Equals(""))
+                                {   
+                                    
+                                    isbnet = libb.numero.Substring(1, lim);
+                                }
+                                else { isbnet = libb.ISBN; }
 
                                 reporte.SetParameterValue("picturePath" + posEtiqueta, @"C:\codigos\" + libb.Estante + libb.Pasillo + i + ".bmp");
-                                reporte.SetParameterValue("etiqueta" + posEtiqueta, "E:"+libb.Estante+"/"+"P:"+libb.Pasillo+"/"+"N:"+libb.Nivel+" "+libb.ISBN+"\n"+libb.Titulo);
+                                reporte.SetParameterValue("etiqueta" + posEtiqueta, "E:"+libb.Estante+"/"+"P:"+libb.Pasillo+"/"+"N:"+libb.Nivel+" "+isbnet+"\n"+libb.Titulo);
                                 posEtiqueta = posEtiqueta + 1;
                             }
                             catch (Exception ex) {
@@ -1231,8 +1240,6 @@ namespace ClasesBiblioteca
                 }
             }
         }
-
-
 
         private void cmbPais_Leave(object sender, EventArgs e)
         {

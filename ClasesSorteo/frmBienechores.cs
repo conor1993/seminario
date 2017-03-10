@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using CN = ClasesNegocio;
 using System.Data.SqlClient;
 
+
 namespace ClasesSorteo
 {
     public partial class frmBienechores : Form, CN.iForm
@@ -23,146 +24,43 @@ namespace ClasesSorteo
             InitializeComponent();
         }
 
+        //memtodos interfaz grafica
         private void frmBienechores_Load(object sender, EventArgs e)
         {   
             
-            gpxAportacion.Location = new Point(12, 218);
+            gpxAportacion.Location = new Point(12, 270);
             gpxAportacion.Size = new System.Drawing.Size(854, 100);
-            dgvBienechores.Location = new Point(18, 350);
-            llenarCombos();
-            llenarGrid();
-        }
+            dgvBienechores.Location = new Point(18, 400);
 
-        private void radtarjeta_Click(object sender, EventArgs e)
-        {
-            gpxTarjeta.Visible = true;
-            gpxAportacion.Size = new System.Drawing.Size(854, 271);
-            if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 500); }
-            if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 639); }
-            
-        }
-
-        private void rdtefectivo_Click(object sender, EventArgs e)
-        {
-            gpxTarjeta.Visible = false;
-            gpxAportacion.Size = new System.Drawing.Size(854, 100);
-            if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 350); }
-
-            if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 500); }
+            llenarcombos();
+            llenargrid();
 
         }
 
-        private void rdtrans_Click(object sender, EventArgs e)
-        {
-            gpxTarjeta.Visible = false;
-            gpxAportacion.Size = new System.Drawing.Size(854, 100);
-            if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 350); }
-            if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 500); }
-        }
+
+   
+
 
         private void rdtsi_Click(object sender, EventArgs e)
         {
             gpxRecibos.Visible = true;
-            gpxAportacion.Location = new Point(12, 331);
-            if (radtarjeta.Checked) { dgvBienechores.Location = new Point(18, 639);}
-            if (!radtarjeta.Checked) { dgvBienechores.Location = new Point(18, 500); }
+            gpxAportacion.Location = new Point(12, 370);
+            if (cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 645); }
+            if (!cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 500); }
+
 
         }
 
         private void rdtno_Click(object sender, EventArgs e)
         {
+            
             gpxRecibos.Visible = false;
-            gpxAportacion.Location = new Point(12, 218);
-            if (radtarjeta.Checked) { dgvBienechores.Location = new Point(18, 500); }
-            if (!radtarjeta.Checked) { dgvBienechores.Location = new Point(18, 350); }
+            gpxAportacion.Location = new Point(12, 271);
+            if (cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 550); }
+            if (!cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 400); }
         }
 
-        private void llenarCombos()
-        {
-            try
-            {
-                if (CN.DBU.Cnn.State == ConnectionState.Closed)
-                    CN.DBU.Cnn.Open();
-
-                    String cons = "";
-                    DtAdap = new SqlDataAdapter();
-                    dtsPar = new DataSet();
-                    cons = "SELECT [id] ,[NombreEquipio] FROM [dbo].[CatEquipo]";
-                    DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
-                    DtAdap.Fill(dtsPar);
-                    DtAdap = null;
-                    cmbequipo.DisplayMember = "NombreEquipio";
-                    cmbequipo.ValueMember = "id";
-                    cmbequipo.DataSource = dtsPar.Tables[0].DefaultView;
-                    cmbequipo.SelectedIndex = -1;
-                    cmbequipo.Text = "Seleccione una opción";
-                    dtsPar = null;
-                 
-                    CN.DBU.Cnn.Close();
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            try
-            {
-                if (CN.DBU.Cnn.State == ConnectionState.Closed)
-                    CN.DBU.Cnn.Open();
-
-                String cons = "";
-                DtAdap = new SqlDataAdapter();
-                dtsPar = new DataSet();
-                cons = "select * from sortcatbancos";
-                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
-                DtAdap.Fill(dtsPar);
-                DtAdap = null;
-                cmbBanco.DisplayMember = "nombre";
-                cmbBanco.ValueMember = "id";
-                cmbBanco.DataSource = dtsPar.Tables[0].DefaultView;
-                cmbBanco.SelectedIndex = -1;
-                cmbBanco.Text = "Seleccione una opción";
-                dtsPar = null;
-
-                CN.DBU.Cnn.Close();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            try
-            {
-                if (CN.DBU.Cnn.State == ConnectionState.Closed)
-                    CN.DBU.Cnn.Open();
-
-                String cons = "";
-                DtAdap = new SqlDataAdapter();
-                dtsPar = new DataSet();
-                cons = "select * from sortcattarjeta";
-                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
-                DtAdap.Fill(dtsPar);
-                DtAdap = null;
-                cmbtarjeta.DisplayMember = "nombre";
-                cmbtarjeta.ValueMember = "id";
-                cmbtarjeta.DataSource = dtsPar.Tables[0].DefaultView;
-                cmbtarjeta.SelectedIndex = -1;
-                cmbtarjeta.Text = "Seleccione una opción";
-                dtsPar = null;
-
-                CN.DBU.Cnn.Close();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
-
+        //metodos basicos abc
         #region iForm Members
 
         bool[] CN.iForm.ToolBarStatus
@@ -179,69 +77,57 @@ namespace ClasesSorteo
 
         void CN.iForm.Guardar()
         {
-            if (!validarDatos())
-                return;
-            String idbn = txtidbienechores.Text;
-            //obtener datos ----------------------------------------------------------------
-            String nombre     = txtNombre.Text;
-            String apellidop  = txtapellidoPaterno.Text;
-            String apellidom  = txtapellidoMaterno.Text;
-            int equipoo = (int)cmbequipo.SelectedValue;
-            System.DateTime fecha = dtmcumple.Value;
-            String dom = txtdomicilio.Text;
-            int telefono = Convert.ToInt32(txtTelefono.Text);
-            int celular = Convert.ToInt32(txtClular.Text);
-            String email = txtemail.Text;
-            int recibo = 0;
-            if (rdtsi.Checked) { recibo =1; }
-            bool tar = false;
-            if (radtarjeta.Checked){tar = true;}
+             //if (!validarDatos())
+               // return;
+          
+            //-------------------------------------------obtener datos ----------------------------------------------------------------
+            
+                int contrato = Convert.ToInt32(txtContrato.Text.Trim());
+                String nombre = txtNombre.Text;
+                String apellidop = txtapellidoPaterno.Text;
+                String apellidom = txtapellidoMaterno.Text;
+                int equipoo = (int)cmbequipo.SelectedValue;
+                System.DateTime fecha = dtmcumple.Value;
+                bool estatus = rdtestatussi.Checked;
+                String dom = txtdomicilio.Text.Trim();
+                long telefono = Convert.ToInt64(txtTelefono.Text);
+                long celular = Convert.ToInt64(txtClular.Text);
+                String email = txtemail.Text.Trim();
+                int programa = (int)cmbPrograma.SelectedValue;
+                int cuentac = (int)cmbCuentacobro.SelectedValue;
+                int tipopago = (int)cmbTipopago.SelectedValue;
+                int cantidad=0;
+                try {cantidad = Convert.ToInt32(txtOtracantidad.Text); }
+                catch (Exception ex) {
+                    if (rdtaportacion1000.Checked) { cantidad = 1000; }
+                    if (rdtaportacion1500.Checked) { cantidad = 1500; }
+                    if (rdtAportacion2000.Checked) { cantidad = 2000; }
+                    if (rdtaportacion500.Checked) { cantidad = 500; }
+                }
+              //tarjeta
+                int idbanco=0;
+                int idTipotarjeta = 0;
+                long notarjeta = 0;
+                System.DateTime Fechaexpiracion = dtmExpiracion.Value;
+                int Codigoseguridad = 0;
+                String Clave = "";
 
-            //recibo deducible ----------------------------------------------------------
-            String razonsocial = "";
-            String domfiscal = "";
-            String rfc = "";
-            int telefonofiscal =0;
+                if (cmbTipopago.Text.Equals("TARJETA")) {
+                    idbanco = (int)cmbBanco.SelectedValue;
+                    idTipotarjeta = (int)cmbtarjeta.SelectedValue;
+                    notarjeta = Convert.ToInt64(txtNotarjeta.Text);
+                    Codigoseguridad = Convert.ToInt32(txtcodseguridad.Text);
+                    Clave = txtclave.Text;
+                }
+            //recivo impuesto
+                String razonsocial = txtrazonSocial.Text;
+                String rfc = txtrfc.Text;
+                String domrec = txtdomicilioFiscal.Text;
+                long telrec = Convert.ToInt64(txttelefonoimpuesto.Text);
+         
 
-            if (rdtsi.Checked) {
-             razonsocial = txtrazonSocial.Text;
-             domfiscal = txtdomicilioFiscal.Text;
-             rfc = txtrfc.Text;
-             telefonofiscal = Convert.ToInt32(txtTelefono.Text);
-            }
-            //----------------------------------------------------------------------------
-            //datos aportacion mensual----------------------------------------------------
-            int aportacion=0;
-            try{
-            aportacion = Convert.ToInt32(txtOtracantidad.Text);
-            }catch{
 
-            }
-            if (rdtaportacion1000.Checked) { aportacion = 1000; }
-            if (rdtaportacion1500.Checked) { aportacion = 1500; }
-            if (rdtAportacion2000.Checked) { aportacion = 2000; }
-            if (rdtaportacion500.Checked) { aportacion =  500; }
-
-            int tarjeta = 0;
-            int banco = 0;
-            long notarjeta =0;
-            System.DateTime exp = dtmExpiracion.Value;
-            String codseg = "";
-            String clave = "";
-
-           
-
-            if (radtarjeta.Checked) {
-                tarjeta = Convert.ToInt32(cmbtarjeta.SelectedValue);
-                banco = Convert.ToInt32(cmbBanco.SelectedValue);
-                notarjeta =Convert.ToInt64(txtNotarjeta.Text);
-                codseg = txtcodseguridad.Text;
-                clave = txtclave.Text ;
-
-            }
-
-            //sp guardar bienechores--------------------------------------------------------
-
+            //store procedure--------------------------------------------------------------------------------------------------
             try
             {
                 if (CN.DBU.Cnn.State == ConnectionState.Closed)
@@ -253,79 +139,57 @@ namespace ClasesSorteo
                 _SQLComm.CommandType = CommandType.StoredProcedure;
                 _SQLComm.Connection = CN.DBU.Cnn;
 
-
-                _SQLComm.Parameters.Add(new SqlParameter("idbienechor", idbn));
+                //bienechores
+                _SQLComm.Parameters.Add(new SqlParameter("contrato", contrato));
                 _SQLComm.Parameters.Add(new SqlParameter("nombre", nombre));
                 _SQLComm.Parameters.Add(new SqlParameter("apellidoPaterno", apellidop));
                 _SQLComm.Parameters.Add(new SqlParameter("apellidoMaterno", apellidom));
                 _SQLComm.Parameters.Add(new SqlParameter("equipo", equipoo));
                 _SQLComm.Parameters.Add(new SqlParameter("cumpleaños", fecha));
+                _SQLComm.Parameters.Add(new SqlParameter("estatus", estatus));
                 _SQLComm.Parameters.Add(new SqlParameter("domicilio", dom));
                 _SQLComm.Parameters.Add(new SqlParameter("telefono", telefono));
                 _SQLComm.Parameters.Add(new SqlParameter("celular", celular));
-                _SQLComm.Parameters.Add(new SqlParameter("recibo", recibo));
-                _SQLComm.Parameters.Add(new SqlParameter("tar", tar));
-
-                if (rdtsi.Checked)
-                {
-                    _SQLComm.Parameters.Add(new SqlParameter("razonSocial", razonsocial));
-                    _SQLComm.Parameters.Add(new SqlParameter("domicilio2", domfiscal));
-                    _SQLComm.Parameters.Add(new SqlParameter("rfc", rfc));
-                    _SQLComm.Parameters.Add(new SqlParameter("telefono2", telefonofiscal));
-                }
-                else {
-                    _SQLComm.Parameters.Add(new SqlParameter("razonSocial", DBNull.Value));
-                    _SQLComm.Parameters.Add(new SqlParameter("domicilio2", DBNull.Value));
-                    _SQLComm.Parameters.Add(new SqlParameter("rfc", DBNull.Value));
-                    _SQLComm.Parameters.Add(new SqlParameter("telefono2", DBNull.Value));
-                
-                }
-
-                _SQLComm.Parameters.Add(new SqlParameter("aportacion", aportacion));
-
-                if (radtarjeta.Checked)
-                {
-                    _SQLComm.Parameters.Add(new SqlParameter("tarjeta", tarjeta));
-                    _SQLComm.Parameters.Add(new SqlParameter("banco", banco));
-                    _SQLComm.Parameters.Add(new SqlParameter("notarjeta", notarjeta));
-                    _SQLComm.Parameters.Add(new SqlParameter("fechaexpiracion", exp));
-                    _SQLComm.Parameters.Add(new SqlParameter("codseguridad", codseg));
-                    _SQLComm.Parameters.Add(new SqlParameter("clave", clave));
+                _SQLComm.Parameters.Add(new SqlParameter("email", email));
+                _SQLComm.Parameters.Add(new SqlParameter("programa", programa));
+                _SQLComm.Parameters.Add(new SqlParameter("cuentac", cuentac));
+                _SQLComm.Parameters.Add(new SqlParameter("tipopago", tipopago));
+                _SQLComm.Parameters.Add(new SqlParameter("cantidad", cantidad));
+                //tarjeta
+                _SQLComm.Parameters.Add(new SqlParameter("IdBanco", idbanco));
+                _SQLComm.Parameters.Add(new SqlParameter("idTipotarjeta", idTipotarjeta));
+                _SQLComm.Parameters.Add(new SqlParameter("Notarjeta", notarjeta));
+                _SQLComm.Parameters.Add(new SqlParameter("Fechaexpiracion", Fechaexpiracion));
+                _SQLComm.Parameters.Add(new SqlParameter("Codigoseguridad", Codigoseguridad));
+                _SQLComm.Parameters.Add(new SqlParameter("Clave", Clave));
+                //recivo
+                _SQLComm.Parameters.Add(new SqlParameter("Razonsocial", razonsocial));
+                _SQLComm.Parameters.Add(new SqlParameter("Rfc", rfc));
+                _SQLComm.Parameters.Add(new SqlParameter("DomicilioFiscal", domrec));
+                _SQLComm.Parameters.Add(new SqlParameter("Telefonofiscal", telrec));
 
 
-                }
-                                   
-                else {
-
-                    _SQLComm.Parameters.Add(new SqlParameter("tarjeta", DBNull.Value));
-                    _SQLComm.Parameters.Add(new SqlParameter("banco", DBNull.Value));
-                    _SQLComm.Parameters.Add(new SqlParameter("notarjeta", DBNull.Value));
-                    _SQLComm.Parameters.Add(new SqlParameter("fechaexpiracion", DBNull.Value));
-                    _SQLComm.Parameters.Add(new SqlParameter("codseguridad", DBNull.Value));
-                    _SQLComm.Parameters.Add(new SqlParameter("clave", DBNull.Value));
-         
-                
-                }
-
-                _SQLComm.Parameters.Add(new SqlParameter("msg", SqlDbType.VarChar,100));
+                _SQLComm.Parameters.Add(new SqlParameter("msg", SqlDbType.VarChar, 100));
                 _SQLComm.Parameters["msg"].Direction = ParameterDirection.Output;
 
                 _SQLComm.ExecuteNonQuery();
 
                 CN.DBU.Cnn.Close();
                 limpiar();
-                llenarGrid();
-                MessageBox.Show(_SQLComm.Parameters["msg"].Value.ToString(), "Aviso error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+                llenargrid();
+                MessageBox.Show(_SQLComm.Parameters["msg"].Value.ToString(), "Aviso error",MessageBoxButtons.OK,MessageBoxIcon.Information);
 
-            }
+
+            }       
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            
+
+
 
         }
-
 
         void CN.iForm.Imprimir()
         {
@@ -408,7 +272,8 @@ namespace ClasesSorteo
                 }
             }
 
-            if (radtarjeta.AutoCheck) {
+            if (cmbTipopago.Text.Equals("TARJETA"))
+            {
                 if (cmbBanco.SelectedIndex == -1)
                 {
                     mensaje = mensaje + "    * No se ha capturado el banco.\n";
@@ -445,6 +310,7 @@ namespace ClasesSorteo
         private void limpiar() {
          
             //datos
+            txtContrato.Text = "";
             txtNombre.Text = "";
             txtapellidoMaterno.Text = "";
             txtapellidoPaterno.Text = "";
@@ -461,12 +327,49 @@ namespace ClasesSorteo
             txtrfc.Text = "";
             txtTelefono.Text = "";
             txttelefonoimpuesto.Text = "";
-            txtidbienechores.Text = "";
+            cmbTipopago.SelectedValue = 0;
+            cmbtarjeta.SelectedValue = 0;
+            cmbCuentacobro.SelectedValue = 0;
+            cmbPrograma.SelectedValue = 0;
+            cmbequipo.SelectedValue = 0;
+            cmbBanco.SelectedValue = 0;
+
+           
            
         }
 
         #endregion
 
+        //eventos
+        private void cmbTipopago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbTipopago.Text.Equals("TARJETA"))
+            {
+                gpxTarjeta.Visible = true;
+                gpxAportacion.Size = new System.Drawing.Size(854, 271);
+                if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 550); }
+                if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 645); }
+            }
+
+            if (cmbTipopago.Text.Equals("EFECTIVO"))
+            {
+                gpxTarjeta.Visible = false;
+                gpxAportacion.Size = new System.Drawing.Size(854, 100);
+                if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 400); }
+
+                if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 500); }
+
+            }
+
+            if (cmbTipopago.Text.Equals("TRANSFERENCIA") || (int)cmbTipopago.SelectedValue == 0)
+            {
+                gpxTarjeta.Visible = false;
+                gpxAportacion.Size = new System.Drawing.Size(854, 100);
+                if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 400); }
+
+                if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 500); }
+            }
+        }
 
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -514,61 +417,208 @@ namespace ClasesSorteo
             }
         }
 
-        private void llenarGrid()
-        {
-
-            dgvBienechores.DataSource =null ;
-            String cons = "";
-
-            DtAdap = new SqlDataAdapter();
-            dtsPar2 = new DataSet();
-
-            cons = "select  bnc.id ,CONCAT (bnc.nombre,' ',bnc.apellidoPaterno,' ',bnc.apellidoMaterno) AS nombre, bnc.domicilio,bnc.telefono, cte.NombreEquipio as Equipo "
-                   +"from SortBienechores as bnc join CatEquipo as cte on cte.id = bnc.equipo ";
-            DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
-            DtAdap.Fill(dtsPar2);
-            DtAdap = null;
-            dvwParr = new DataView(dtsPar2.Tables[0]);
-            dgvBienechores.DataSource = dvwParr;
-        }
-
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-            if (this.ActiveControl.Name == "txtNombre")
-                FiltraParticipantes();
-
-        }
-
-        private void FiltraParticipantes()
-        {
-            string filtro = "";
-            if (txtNombre.Text.Trim() != "")
-                filtro = String.Format(" and nombre Like '%{0}%'", txtNombre.Text.Trim());
-
-
-
-            if (filtro.Length > 0)
-            {
-                dvwParr.RowFilter = filtro.Substring(5, filtro.Length - 5);
-
-            }
-
-            else
-            {
-                dvwParr.RowFilter = "";
-            }
-            try
-            {
-                dgvBienechores.Refresh();
-            }
-            catch(Exception ex) {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void dgvBienechores_DoubleClick(object sender, EventArgs e)
         {
-            limpiar();
+            if (dgvBienechores.SelectedRows.Count > 0)
+            {
+               
+                traerdatosBienechores(dgvBienechores.SelectedRows[0].Cells[0].Value.ToString());
+                
+            }
+        }
+
+
+        // metodos del sistema
+
+        private void llenarcombos()
+        {
+            try
+            {
+                if (CN.DBU.Cnn.State == ConnectionState.Closed)
+                    CN.DBU.Cnn.Open();
+
+                String cons = "";
+                DtAdap = new SqlDataAdapter();
+                dtsPar = new DataSet();
+                cons = "SELECT [Id] ,[Nombre] FROM [dbo].[SortCatEquipos]  union SELECT 0,'Seleccione una opción'";
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+                DtAdap.Fill(dtsPar);
+                DtAdap = null;
+                cmbequipo.DisplayMember = "Nombre";
+                cmbequipo.ValueMember = "Id";
+                cmbequipo.DataSource = dtsPar.Tables[0].DefaultView;
+                cmbequipo.SelectedIndex = -1;
+                cmbPrograma.Text = "Seleccione una opción";
+                dtsPar = null;
+
+                CN.DBU.Cnn.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            try
+            {
+                if (CN.DBU.Cnn.State == ConnectionState.Closed)
+                    CN.DBU.Cnn.Open();
+
+                String cons = "";
+                DtAdap = new SqlDataAdapter();
+                dtsPar = new DataSet();
+                cons = "SELECT [Id] ,[Nombre] FROM [dbo].[SortCatProgramas]  union SELECT 0,'Seleccione una opción'";
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+                DtAdap.Fill(dtsPar);
+                DtAdap = null;
+                cmbPrograma.DisplayMember = "Nombre";
+                cmbPrograma.ValueMember = "Id";
+                cmbPrograma.DataSource = dtsPar.Tables[0].DefaultView;
+                cmbPrograma.SelectedIndex = -1;
+                cmbPrograma.Text = "Seleccione una opción";
+                dtsPar = null;
+
+                CN.DBU.Cnn.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            try
+            {
+                if (CN.DBU.Cnn.State == ConnectionState.Closed)
+                    CN.DBU.Cnn.Open();
+
+                String cons = "";
+                DtAdap = new SqlDataAdapter();
+                dtsPar = new DataSet();
+                cons = "SELECT [Id] ,[Nombre] FROM [dbo].[SortCatTipopago]  union SELECT 0,'Seleccione una opción'";
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+                DtAdap.Fill(dtsPar);
+                DtAdap = null;
+                cmbTipopago.DisplayMember = "Nombre";
+                cmbTipopago.ValueMember = "Id";
+                cmbTipopago.DataSource = dtsPar.Tables[0].DefaultView;
+                cmbTipopago.SelectedIndex = -1;
+                cmbTipopago.Text = "Seleccione una opción";
+                dtsPar = null;
+
+                CN.DBU.Cnn.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            try
+            {
+                if (CN.DBU.Cnn.State == ConnectionState.Closed)
+                    CN.DBU.Cnn.Open();
+
+                String cons = "";
+                DtAdap = new SqlDataAdapter();
+                dtsPar = new DataSet();
+                cons = "SELECT [Id] ,[Nombre] FROM [dbo].[SortCatCuentacobro]  union SELECT 0,'Seleccione una opción'";
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+                DtAdap.Fill(dtsPar);
+                DtAdap = null;
+                cmbCuentacobro.DisplayMember = "Nombre";
+                cmbCuentacobro.ValueMember = "Id";
+                cmbCuentacobro.DataSource = dtsPar.Tables[0].DefaultView;
+                cmbCuentacobro.SelectedIndex = -1;
+                cmbCuentacobro.Text = "Seleccione una opción";
+                dtsPar = null;
+
+                CN.DBU.Cnn.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                if (CN.DBU.Cnn.State == ConnectionState.Closed)
+                    CN.DBU.Cnn.Open();
+
+                String cons = "";
+                DtAdap = new SqlDataAdapter();
+                dtsPar = new DataSet();
+                cons = "SELECT [Id] ,[Nombre] FROM [dbo].[SortCatBancos]  union SELECT 0,'Seleccione una opción'";
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+                DtAdap.Fill(dtsPar);
+                DtAdap = null;
+                cmbBanco.DisplayMember = "Nombre";
+                cmbBanco.ValueMember = "Id";
+                cmbBanco.DataSource = dtsPar.Tables[0].DefaultView;
+                cmbBanco.SelectedIndex = -1;
+                cmbBanco.Text = "Seleccione una opción";
+                dtsPar = null;
+
+                CN.DBU.Cnn.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                if (CN.DBU.Cnn.State == ConnectionState.Closed)
+                    CN.DBU.Cnn.Open();
+
+                String cons = "";
+                DtAdap = new SqlDataAdapter();
+                dtsPar = new DataSet();
+                cons = "SELECT [Id] ,[Nombre] FROM [dbo].[SortCatTipotarjeta] union SELECT 0,'Seleccione una opción'";
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+                DtAdap.Fill(dtsPar);
+                DtAdap = null;
+                cmbtarjeta.DisplayMember = "Nombre";
+                cmbtarjeta.ValueMember = "Id";
+                cmbtarjeta.DataSource = dtsPar.Tables[0].DefaultView;
+                cmbtarjeta.SelectedIndex = -1;
+                cmbtarjeta.Text = "Seleccione una opción";
+                dtsPar = null;
+
+                CN.DBU.Cnn.Close();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void llenargrid() {
+
+                String cons = "";
+
+                DtAdap = new SqlDataAdapter();
+                cons = "select contrato as Referencia , Nombre, ApellidoPaterno+' '+ApellidoMaterno as Apellido from SortCatBienechores";
+                DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
+                dtsPar = new DataSet();
+                dtsPar.Tables.Clear();
+                DtAdap.Fill(dtsPar);
+                DtAdap = null;
+                dgvBienechores.AutoGenerateColumns = false;
+                dvwParr = new DataView(dtsPar.Tables[0]);
+                dgvBienechores.DataSource = dvwParr;
+   
+
+        }
+
+        private void traerdatosBienechores(string contrato)
+        {
+
             DtAdap = new SqlDataAdapter();
             DataSet dtseqp = new DataSet();
 
@@ -577,24 +627,18 @@ namespace ClasesSorteo
                 if (CN.DBU.Cnn.State == ConnectionState.Closed)
                     CN.DBU.Cnn.Open();
 
-                String id = dgvBienechores.SelectedRows[0].Cells[0].Value.ToString();
+                String cons ="select  * from SortCatBienechores as bnc "
+                            +"left join SortCatTarjetas  as trj   on bnc.Contrato = trj.IdBienechor "
+                            + "left join SortCatRecivoImpuesto as rec on rec.IdBienechor = bnc.Contrato where bnc.Contrato= " + "'" + contrato.Trim() + "'";
 
-
-                String cons = "select bnc.id, bnc.nombre ,bnc.apellidoPaterno,bnc.apellidoMaterno, bnc.equipo,bnc.cumpleAños,bnc.domicilio,bnc.telefono,bnc.celular,bnc.recibo,bnc.tarjeta,apt.aportacion,rec.RazonSocial,rec.domicilio,rec.rfc,rec.telefono,trj.idTipotargeta,trj.idBanco,trj.noTargeta,trj.fechaexpiracion,trj.codigoSeguridad,trj.claveTargeta  from "
-                               + " SortAportaciones as apt "
-                                + " join SortBienechores as bnc on apt.id_bienechor = bnc.id "
-                                + " left join SortTtargeta as trj on bnc.id = trj.idBienechor "
-                                + " left join SortReciboImpuesto as rec on rec.idBienechores = trj.idBienechor "
-                                + " where apt.id_bienechor =" + id;
-
+                
                 DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
-
-
                 DtAdap.Fill(dtseqp);
                 DtAdap = null;
 
-                //mostrar paneles ocultos
-                txtidbienechores.Text = dtseqp.Tables[0].Rows[0].ItemArray[0].ToString();
+                limpiar();
+                //datos de bienechores
+                txtContrato.Text = dtseqp.Tables[0].Rows[0].ItemArray[0].ToString();
                 txtNombre.Text = dtseqp.Tables[0].Rows[0].ItemArray[1].ToString();
                 txtapellidoPaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[2].ToString();
                 txtapellidoMaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[3].ToString();
@@ -603,48 +647,29 @@ namespace ClasesSorteo
                 txtdomicilio.Text = dtseqp.Tables[0].Rows[0].ItemArray[6].ToString();
                 txtTelefono.Text = dtseqp.Tables[0].Rows[0].ItemArray[7].ToString();
                 txtClular.Text = dtseqp.Tables[0].Rows[0].ItemArray[8].ToString();
-                txtOtracantidad.Text = dtseqp.Tables[0].Rows[0].ItemArray[11].ToString();
-                //si selecciono recibo igual a si
-                if (Convert.ToInt32(dtseqp.Tables[0].Rows[0].ItemArray[9]) == 1)
-                {
-                    rdtsi.Checked = true;
-                    gpxRecibos.Visible = true;
-                    gpxAportacion.Location = new Point(12, 331);
-                    dgvBienechores.Location = new Point(18, 500);
-                    txtrazonSocial.Text = dtseqp.Tables[0].Rows[0].ItemArray[12].ToString();
-                    txtdomicilioFiscal.Text = dtseqp.Tables[0].Rows[0].ItemArray[13].ToString();
-                    txtrfc.Text = dtseqp.Tables[0].Rows[0].ItemArray[14].ToString();
-                    txttelefonoimpuesto.Text = dtseqp.Tables[0].Rows[0].ItemArray[15].ToString();
+                cmbPrograma.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[10];
+                cmbTipopago.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[11];
+                cmbCuentacobro.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[12];
+                txtemail.Text = dtseqp.Tables[0].Rows[0].ItemArray[13].ToString();
+                txtOtracantidad.Text = dtseqp.Tables[0].Rows[0].ItemArray[14].ToString();
+                //tarjeta
+                if (DBNull.Value != dtseqp.Tables[0].Rows[0].ItemArray[15]) {
+                  cmbBanco.SelectedValue=dtseqp.Tables[0].Rows[0].ItemArray[17];
+                  cmbtarjeta.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[18];
+                  txtNotarjeta.Text = dtseqp.Tables[0].Rows[0].ItemArray[19].ToString();
+                  dtmExpiracion.Value=(System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[20];
+                  txtcodseguridad.Text = dtseqp.Tables[0].Rows[0].ItemArray[21].ToString();
+                  txtclave.Text = dtseqp.Tables[0].Rows[0].ItemArray[22].ToString();
 
                 }
-                else
+                if (DBNull.Value != dtseqp.Tables[0].Rows[0].ItemArray[23])
                 {
-                    gpxRecibos.Visible = false;
-                    gpxAportacion.Location = new Point(12, 218);
-                    gpxAportacion.Size = new System.Drawing.Size(854, 100);
-                    dgvBienechores.Location = new Point(18, 350);
-                    rdtno.Checked = true;
+                    rdtsi.Checked=true;
+                    txtrazonSocial.Text = dtseqp.Tables[0].Rows[0].ItemArray[24].ToString();
+                    txtrfc.Text = dtseqp.Tables[0].Rows[0].ItemArray[25].ToString();
+                    txtdomicilioFiscal.Text = dtseqp.Tables[0].Rows[0].ItemArray[26].ToString();
+                    txttelefonoimpuesto.Text = dtseqp.Tables[0].Rows[0].ItemArray[27].ToString();
                 }
-
-                if (Convert.ToInt32(dtseqp.Tables[0].Rows[0].ItemArray[10]) == 1)
-                {
-
-                    radtarjeta.Checked = true;
-                    gpxTarjeta.Visible = true;
-                    gpxAportacion.Size = new System.Drawing.Size(854, 271);
-
-                    if (rdtno.Checked) { dgvBienechores.Location = new Point(18, 500); }
-                    if (rdtsi.Checked) { dgvBienechores.Location = new Point(18, 639); }
-                    cmbtarjeta.SelectedValue = Convert.ToUInt32(dtseqp.Tables[0].Rows[0].ItemArray[16]);
-                    cmbBanco.SelectedValue = Convert.ToUInt32(dtseqp.Tables[0].Rows[0].ItemArray[17]);
-                    txtNotarjeta.Text = dtseqp.Tables[0].Rows[0].ItemArray[18].ToString();
-                    dtmExpiracion.Value = (System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[19];
-                    txtcodseguridad.Text = dtseqp.Tables[0].Rows[0].ItemArray[20].ToString();
-                    txtclave.Text = dtseqp.Tables[0].Rows[0].ItemArray[21].ToString();
-
-                }
-
-
 
                 CN.DBU.Cnn.Close();
 
@@ -653,11 +678,11 @@ namespace ClasesSorteo
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
 
 
 
-   
 
 
 

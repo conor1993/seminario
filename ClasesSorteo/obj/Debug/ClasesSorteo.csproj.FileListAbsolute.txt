@@ -38,3 +38,4 @@ F:\git\seminario\ClasesSorteo\bin\Debug\Seguridad.pdb
 F:\git\seminario\ClasesSorteo\bin\Debug\Seguridad.XmlSerializers.dll
 F:\git\seminario\ClasesSorteo\obj\Debug\ClasesSorteo.dll
 F:\git\seminario\ClasesSorteo\obj\Debug\ClasesSorteo.pdb
+F:\git\seminario\ClasesSorteo\obj\Debug\ClasesSorteo.Properties.Resources.resources

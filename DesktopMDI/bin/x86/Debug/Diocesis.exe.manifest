@@ -170,14 +170,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasesBiblioteca.dll" size="6349824">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasesBiblioteca.dll" size="6349312">
       <assemblyIdentity name="ClasesBiblioteca" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>k9JqdcPLzYL9BcOJ4JJQ8uId4T4=</dsig:DigestValue>
+        <dsig:DigestValue>sRWdVnz5zq5hR8Lp8ZA1qd9eAVM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -206,14 +206,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasesSorteo.dll" size="39936">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ClasesSorteo.dll" size="43520">
       <assemblyIdentity name="ClasesSorteo" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>yCW+ETqrgFaCR00HzSijvxvm8+4=</dsig:DigestValue>
+        <dsig:DigestValue>97haR7UYESiFcCxiTzAcOUOMazs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -225,7 +225,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>qIBKZLqWrKzIVBvXh/OB4xi5VYI=</dsig:DigestValue>
+        <dsig:DigestValue>is5o0g12ioMmbW4WJ0aRCGV/M/Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
