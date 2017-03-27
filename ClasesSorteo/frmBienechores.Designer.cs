@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbequipo = new System.Windows.Forms.ComboBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtid = new System.Windows.Forms.TextBox();
             this.cmbCuentacobro = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rdtestatusno = new System.Windows.Forms.RadioButton();
@@ -76,10 +77,6 @@
             this.txttelefonoimpuesto = new System.Windows.Forms.TextBox();
             this.txtrfc = new System.Windows.Forms.TextBox();
             this.gpxAportacion = new System.Windows.Forms.GroupBox();
-            this.rdtaportacion500 = new System.Windows.Forms.RadioButton();
-            this.rdtaportacion1000 = new System.Windows.Forms.RadioButton();
-            this.rdtaportacion1500 = new System.Windows.Forms.RadioButton();
-            this.rdtAportacion2000 = new System.Windows.Forms.RadioButton();
             this.gpxTarjeta = new System.Windows.Forms.GroupBox();
             this.dtmExpiracion = new System.Windows.Forms.DateTimePicker();
             this.cmbBanco = new System.Windows.Forms.ComboBox();
@@ -94,6 +91,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.dgvBienechores = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Referencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -152,6 +150,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtid);
             this.groupBox3.Controls.Add(this.cmbCuentacobro);
             this.groupBox3.Controls.Add(this.groupBox1);
             this.groupBox3.Controls.Add(this.cmbPrograma);
@@ -187,6 +186,14 @@
             this.groupBox3.TabIndex = 65;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Datos";
+            // 
+            // txtid
+            // 
+            this.txtid.Location = new System.Drawing.Point(84, 19);
+            this.txtid.Name = "txtid";
+            this.txtid.Size = new System.Drawing.Size(42, 26);
+            this.txtid.TabIndex = 56;
+            this.txtid.Visible = false;
             // 
             // cmbCuentacobro
             // 
@@ -316,6 +323,7 @@
             this.rdtno.TabStop = true;
             this.rdtno.Text = "NO";
             this.rdtno.UseVisualStyleBackColor = true;
+            this.rdtno.CheckedChanged += new System.EventHandler(this.rdtno_CheckedChanged);
             this.rdtno.Click += new System.EventHandler(this.rdtno_Click);
             // 
             // rdtsi
@@ -328,6 +336,7 @@
             this.rdtsi.TabIndex = 0;
             this.rdtsi.Text = "SI";
             this.rdtsi.UseVisualStyleBackColor = true;
+            this.rdtsi.CheckedChanged += new System.EventHandler(this.rdtsi_CheckedChanged);
             this.rdtsi.Click += new System.EventHandler(this.rdtsi_Click);
             // 
             // dtmcumple
@@ -521,7 +530,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOtracantidad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtOtracantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.txtOtracantidad.Location = new System.Drawing.Point(538, 29);
+            this.txtOtracantidad.Location = new System.Drawing.Point(132, 25);
             this.txtOtracantidad.MaxLength = 50;
             this.txtOtracantidad.Name = "txtOtracantidad";
             this.txtOtracantidad.Size = new System.Drawing.Size(271, 21);
@@ -532,7 +541,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(425, 29);
+            this.label6.Location = new System.Drawing.Point(19, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(95, 15);
             this.label6.TabIndex = 43;
@@ -649,11 +658,7 @@
             // gpxAportacion
             // 
             this.gpxAportacion.Controls.Add(this.cmbTipopago);
-            this.gpxAportacion.Controls.Add(this.rdtaportacion500);
             this.gpxAportacion.Controls.Add(this.label26);
-            this.gpxAportacion.Controls.Add(this.rdtaportacion1000);
-            this.gpxAportacion.Controls.Add(this.rdtaportacion1500);
-            this.gpxAportacion.Controls.Add(this.rdtAportacion2000);
             this.gpxAportacion.Controls.Add(this.gpxTarjeta);
             this.gpxAportacion.Controls.Add(this.txtOtracantidad);
             this.gpxAportacion.Controls.Add(this.label6);
@@ -664,54 +669,6 @@
             this.gpxAportacion.TabIndex = 67;
             this.gpxAportacion.TabStop = false;
             this.gpxAportacion.Text = "Aportación Mensual";
-            // 
-            // rdtaportacion500
-            // 
-            this.rdtaportacion500.AutoSize = true;
-            this.rdtaportacion500.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.rdtaportacion500.Location = new System.Drawing.Point(326, 27);
-            this.rdtaportacion500.Name = "rdtaportacion500";
-            this.rdtaportacion500.Size = new System.Drawing.Size(77, 19);
-            this.rdtaportacion500.TabIndex = 17;
-            this.rdtaportacion500.TabStop = true;
-            this.rdtaportacion500.Text = "$500.00";
-            this.rdtaportacion500.UseVisualStyleBackColor = true;
-            // 
-            // rdtaportacion1000
-            // 
-            this.rdtaportacion1000.AutoSize = true;
-            this.rdtaportacion1000.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.rdtaportacion1000.Location = new System.Drawing.Point(221, 26);
-            this.rdtaportacion1000.Name = "rdtaportacion1000";
-            this.rdtaportacion1000.Size = new System.Drawing.Size(85, 19);
-            this.rdtaportacion1000.TabIndex = 16;
-            this.rdtaportacion1000.TabStop = true;
-            this.rdtaportacion1000.Text = "$1000.00";
-            this.rdtaportacion1000.UseVisualStyleBackColor = true;
-            // 
-            // rdtaportacion1500
-            // 
-            this.rdtaportacion1500.AutoSize = true;
-            this.rdtaportacion1500.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.rdtaportacion1500.Location = new System.Drawing.Point(116, 27);
-            this.rdtaportacion1500.Name = "rdtaportacion1500";
-            this.rdtaportacion1500.Size = new System.Drawing.Size(85, 19);
-            this.rdtaportacion1500.TabIndex = 15;
-            this.rdtaportacion1500.TabStop = true;
-            this.rdtaportacion1500.Text = "$1500.00";
-            this.rdtaportacion1500.UseVisualStyleBackColor = true;
-            // 
-            // rdtAportacion2000
-            // 
-            this.rdtAportacion2000.AutoSize = true;
-            this.rdtAportacion2000.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.rdtAportacion2000.Location = new System.Drawing.Point(18, 27);
-            this.rdtAportacion2000.Name = "rdtAportacion2000";
-            this.rdtAportacion2000.Size = new System.Drawing.Size(77, 19);
-            this.rdtAportacion2000.TabIndex = 14;
-            this.rdtAportacion2000.TabStop = true;
-            this.rdtAportacion2000.Text = "2000.00";
-            this.rdtAportacion2000.UseVisualStyleBackColor = true;
             // 
             // gpxTarjeta
             // 
@@ -808,6 +765,7 @@
             this.txtcodseguridad.Name = "txtcodseguridad";
             this.txtcodseguridad.Size = new System.Drawing.Size(165, 21);
             this.txtcodseguridad.TabIndex = 25;
+            this.txtcodseguridad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtcodseguridad_KeyPress);
             // 
             // label20
             // 
@@ -815,9 +773,9 @@
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.label20.Location = new System.Drawing.Point(384, 97);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(46, 15);
+            this.label20.Size = new System.Drawing.Size(48, 15);
             this.label20.TabIndex = 43;
-            this.label20.Text = "Clave:";
+            this.label20.Text = "Clabe:";
             // 
             // label19
             // 
@@ -868,14 +826,15 @@
             this.dgvBienechores.AllowUserToDeleteRows = false;
             this.dgvBienechores.AllowUserToOrderColumns = true;
             this.dgvBienechores.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvBienechores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvBienechores.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBienechores.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBienechores.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvBienechores.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvBienechores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBienechores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
             this.Referencia,
             this.Nombre,
             this.Apellido});
@@ -888,6 +847,14 @@
             this.dgvBienechores.Size = new System.Drawing.Size(838, 111);
             this.dgvBienechores.TabIndex = 68;
             this.dgvBienechores.DoubleClick += new System.EventHandler(this.dgvBienechores_DoubleClick);
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
             // 
             // Referencia
             // 
@@ -985,10 +952,6 @@
         internal System.Windows.Forms.TextBox txtNotarjeta;
         internal System.Windows.Forms.Label label17;
         internal System.Windows.Forms.Label label18;
-        private System.Windows.Forms.RadioButton rdtaportacion500;
-        private System.Windows.Forms.RadioButton rdtaportacion1000;
-        private System.Windows.Forms.RadioButton rdtaportacion1500;
-        private System.Windows.Forms.RadioButton rdtAportacion2000;
         private System.Windows.Forms.DataGridView dgvBienechores;
         internal System.Windows.Forms.TextBox txtContrato;
         internal System.Windows.Forms.Label label23;
@@ -1006,6 +969,8 @@
         internal System.Windows.Forms.Label label27;
         private System.Windows.Forms.ComboBox cmbCuentacobro;
         internal System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox txtid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Referencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Apellido;

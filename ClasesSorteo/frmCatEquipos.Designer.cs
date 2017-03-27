@@ -163,7 +163,7 @@
             this.ClientSize = new System.Drawing.Size(628, 308);
             this.Controls.Add(this.Panel1);
             this.Name = "frmEquipos";
-            this.Text = "Catálogo";
+            this.Text = "Catálogo de Equipos";
             this.Load += new System.EventHandler(this.frmEquipos_Load);
             this.Panel1.ResumeLayout(false);
             this.Panel1.PerformLayout();

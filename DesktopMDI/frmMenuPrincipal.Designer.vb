@@ -76,7 +76,19 @@ Partial Class frmMenuPrincipal
         Me.tssmiVenAcercaDe = New System.Windows.Forms.ToolStripMenuItem()
         Me.SorteoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cuentascobro = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.bancos = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BienechoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CobrosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ObtenerArchivoDeCobroToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RealizarPagoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PagoEnEfectivoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TarjetasRechazadasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DonacionesMensualesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CumpleañosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssmiArchNuevo = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssmiArchGuardar = New System.Windows.Forms.ToolStripMenuItem()
         Me.tssmiArchImprimir = New System.Windows.Forms.ToolStripMenuItem()
@@ -110,6 +122,7 @@ Partial Class frmMenuPrincipal
         Me.CortarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopiarToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.PegarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuPrincipal.SuspendLayout()
         Me.MainToolStrip.SuspendLayout()
         Me.SuspendLayout()
@@ -496,7 +509,7 @@ Partial Class frmMenuPrincipal
         '
         'SorteoToolStripMenuItem
         '
-        Me.SorteoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CToolStripMenuItem, Me.BienechoresToolStripMenuItem})
+        Me.SorteoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CToolStripMenuItem, Me.cuentascobro, Me.ToolStripMenuItem2, Me.bancos, Me.ToolStripMenuItem1, Me.BienechoresToolStripMenuItem, Me.CobrosToolStripMenuItem, Me.ReportesToolStripMenuItem})
         Me.SorteoToolStripMenuItem.Name = "SorteoToolStripMenuItem"
         Me.SorteoToolStripMenuItem.Size = New System.Drawing.Size(53, 20)
         Me.SorteoToolStripMenuItem.Text = "Sorteo"
@@ -504,14 +517,88 @@ Partial Class frmMenuPrincipal
         'CToolStripMenuItem
         '
         Me.CToolStripMenuItem.Name = "CToolStripMenuItem"
-        Me.CToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
         Me.CToolStripMenuItem.Text = "Equipos"
+        '
+        'cuentascobro
+        '
+        Me.cuentascobro.Name = "cuentascobro"
+        Me.cuentascobro.Size = New System.Drawing.Size(169, 22)
+        Me.cuentascobro.Text = "Cuentas de Cobro"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(169, 22)
+        Me.ToolStripMenuItem2.Text = "Programas"
+        '
+        'bancos
+        '
+        Me.bancos.Name = "bancos"
+        Me.bancos.Size = New System.Drawing.Size(169, 22)
+        Me.bancos.Text = "Bancos"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(169, 22)
+        Me.ToolStripMenuItem1.Text = "Tarjetas"
         '
         'BienechoresToolStripMenuItem
         '
         Me.BienechoresToolStripMenuItem.Name = "BienechoresToolStripMenuItem"
-        Me.BienechoresToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BienechoresToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
         Me.BienechoresToolStripMenuItem.Text = "Bienechores"
+        '
+        'CobrosToolStripMenuItem
+        '
+        Me.CobrosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ObtenerArchivoDeCobroToolStripMenuItem, Me.ToolStripMenuItem3, Me.RealizarPagoToolStripMenuItem, Me.PagoEnEfectivoToolStripMenuItem})
+        Me.CobrosToolStripMenuItem.Name = "CobrosToolStripMenuItem"
+        Me.CobrosToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.CobrosToolStripMenuItem.Text = "Cobros"
+        '
+        'ObtenerArchivoDeCobroToolStripMenuItem
+        '
+        Me.ObtenerArchivoDeCobroToolStripMenuItem.Name = "ObtenerArchivoDeCobroToolStripMenuItem"
+        Me.ObtenerArchivoDeCobroToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.ObtenerArchivoDeCobroToolStripMenuItem.Text = "Obtener archivo de cobro"
+        '
+        'RealizarPagoToolStripMenuItem
+        '
+        Me.RealizarPagoToolStripMenuItem.Name = "RealizarPagoToolStripMenuItem"
+        Me.RealizarPagoToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.RealizarPagoToolStripMenuItem.Text = "Realizar Pago"
+        '
+        'PagoEnEfectivoToolStripMenuItem
+        '
+        Me.PagoEnEfectivoToolStripMenuItem.Name = "PagoEnEfectivoToolStripMenuItem"
+        Me.PagoEnEfectivoToolStripMenuItem.Size = New System.Drawing.Size(311, 22)
+        Me.PagoEnEfectivoToolStripMenuItem.Text = "Pago en Efectivo"
+        '
+        'ReportesToolStripMenuItem
+        '
+        Me.ReportesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TarjetasRechazadasToolStripMenuItem, Me.DonacionesMensualesToolStripMenuItem, Me.CumpleañosToolStripMenuItem})
+        Me.ReportesToolStripMenuItem.Name = "ReportesToolStripMenuItem"
+        Me.ReportesToolStripMenuItem.Size = New System.Drawing.Size(169, 22)
+        Me.ReportesToolStripMenuItem.Text = "Reportes"
+        '
+        'TarjetasRechazadasToolStripMenuItem
+        '
+        Me.TarjetasRechazadasToolStripMenuItem.Name = "TarjetasRechazadasToolStripMenuItem"
+        Me.TarjetasRechazadasToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.TarjetasRechazadasToolStripMenuItem.Text = "Tarjetas Rechazadas"
+        '
+        'DonacionesMensualesToolStripMenuItem
+        '
+        Me.DonacionesMensualesToolStripMenuItem.Name = "DonacionesMensualesToolStripMenuItem"
+        Me.DonacionesMensualesToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.DonacionesMensualesToolStripMenuItem.Text = "Donaciones mensuales"
+        '
+        'CumpleañosToolStripMenuItem
+        '
+        Me.CumpleañosToolStripMenuItem.Name = "CumpleañosToolStripMenuItem"
+        Me.CumpleañosToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.CumpleañosToolStripMenuItem.Text = "Cumpleaños"
         '
         'tssmiArchNuevo
         '
@@ -728,6 +815,12 @@ Partial Class frmMenuPrincipal
         Me.PegarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PegarToolStripMenuItem.Text = "&Pegar"
         '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(267, 22)
+        Me.ToolStripMenuItem3.Text = "Archivo de cobro tarjetas rechazadas"
+        '
         'frmMenuPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -838,5 +931,18 @@ Partial Class frmMenuPrincipal
     Friend WithEvents tssmiVenMosaicoVert As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tssmiVenOrganIconos As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tssmiVenAcercaDe As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cuentascobro As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents bancos As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CobrosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ObtenerArchivoDeCobroToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RealizarPagoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PagoEnEfectivoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ReportesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TarjetasRechazadasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DonacionesMensualesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CumpleañosToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

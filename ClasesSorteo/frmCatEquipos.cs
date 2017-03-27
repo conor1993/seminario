@@ -33,7 +33,7 @@ namespace ClasesSorteo
             }
             set
             {
-                throw new NotImplementedException();
+               
             }
         }
 
@@ -88,7 +88,7 @@ namespace ClasesSorteo
 
         public void Imprimir()
         {
-            throw new NotImplementedException();
+           
         }
 
         public void Nuevo()
@@ -98,17 +98,17 @@ namespace ClasesSorteo
 
         public void Cancelar()
         {
-            throw new NotImplementedException();
+           
         }
 
         public void Borrar()
         {
-            throw new NotImplementedException();
+           
         }
 
         public void Buscar()
         {
-            throw new NotImplementedException();
+           
         }
 
         #endregion
@@ -127,7 +127,7 @@ namespace ClasesSorteo
             DtAdap = new SqlDataAdapter();
             dtsPar = new DataSet();
 
-            cons = "select * from catequipo";
+            cons = "select * from SortCatEquipos";
             DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
             DtAdap.Fill(dtsPar);
             DtAdap = null;
@@ -152,7 +152,7 @@ namespace ClasesSorteo
 
                 
                 String id = dgvEquipos.SelectedRows[0].Cells[0].Value.ToString();
-                String cons = "select * from CatEquipo where id = "+id;
+                String cons = "select * from SortCatEquipos where id = " + id;
                 DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
                 
 

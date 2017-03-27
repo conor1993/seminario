@@ -92,7 +92,6 @@ namespace ClasesBiblioteca
          
             
             if (aumentarlibro == true) {
-                MessageBox.Show("if");
                 CN.LibroCol Libros = new CN.LibroCol();
               
                 if (txtIsbn.Text.Trim() != "")
@@ -618,6 +617,7 @@ namespace ClasesBiblioteca
         public void generacod()
         {
             codigos = new ArrayList();
+           
            
             foreach (DataGridViewRow row in dataLibros.Rows)
             {

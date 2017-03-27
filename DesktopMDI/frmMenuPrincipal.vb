@@ -338,6 +338,7 @@ Public Class frmMenuPrincipal
 
 
 #Region "FormasSeminario"
+
     Private Sub ParroquiasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ParroquiasToolStripMenuItem.Click
         Dim forma As New Forma(Of ClasesSeminario.frmCatparroquias)(Me)
     End Sub
@@ -355,7 +356,62 @@ Public Class frmMenuPrincipal
     Private Sub ParticipaciónEnEventosToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles tssmiParticipaciónEnEventos.Click
         Dim forma As New Forma(Of ClasesSeminario.frmRepParticipEventos)(Me)
     End Sub
+
+    Private Sub ToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem1.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmCatTipotarjeta)(Me)
+    End Sub
+
+    Private Sub ToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem2.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmCatprogramas)(Me)
+    End Sub
+
+    Private Sub cuentascobro_Click(sender As System.Object, e As System.EventArgs) Handles cuentascobro.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmCatCuentascobro)(Me)
+    End Sub
+
+    Private Sub bancos_Click(sender As System.Object, e As System.EventArgs) Handles bancos.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmCatBancos)(Me)
+    End Sub
+
+    Private Sub ObtenerArchivoDeCobroToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ObtenerArchivoDeCobroToolStripMenuItem.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmObtenerArchivocobro)(Me)
+    End Sub
+
+    Private Sub RealizarPagoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RealizarPagoToolStripMenuItem.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmPagos)(Me)
+    End Sub
+
+    Private Sub PagoEnEfectivoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PagoEnEfectivoToolStripMenuItem.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmPagoefectivo)(Me)
+    End Sub
+
+    Private Sub TarjetasRechazadasToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles TarjetasRechazadasToolStripMenuItem.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmRpttarjetasRechazadas)(Me)
+    End Sub
+
+    Private Sub DonacionesMensualesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DonacionesMensualesToolStripMenuItem.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmRptDonacionesmesuales)(Me)
+    End Sub
+
+    Private Sub CumpleañosToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CumpleañosToolStripMenuItem.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmRptCumpleanos)(Me)
+    End Sub
+
+
+    Private Sub ToolStripMenuItem3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem3.Click
+        Dim forma As New Forma(Of ClasesSorteo.frmRptCobrotarjetasrechazadas)(Me)
+    End Sub
+
 #End Region
+
+
+
+
+
+
+
+
+ 
 
 
 End Class

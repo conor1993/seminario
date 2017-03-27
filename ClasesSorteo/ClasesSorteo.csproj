@@ -48,6 +48,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -64,30 +70,162 @@
     <Compile Include="frmBienechores.Designer.cs">
       <DependentUpon>frmBienechores.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCatBancos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCatBancos.Designer.cs">
+      <DependentUpon>frmCatBancos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatCuentascobro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCatCuentascobro.Designer.cs">
+      <DependentUpon>frmCatCuentascobro.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCatEquipos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCatEquipos.Designer.cs">
       <DependentUpon>frmCatEquipos.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCatprogramas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCatprogramas.Designer.cs">
+      <DependentUpon>frmCatprogramas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCatTipotarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCatTipotarjeta.Designer.cs">
+      <DependentUpon>frmCatTipotarjeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmObtenerArchivocobro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmObtenerArchivocobro.Designer.cs">
+      <DependentUpon>frmObtenerArchivocobro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPagoefectivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPagoefectivo.Designer.cs">
+      <DependentUpon>frmPagoefectivo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPagos.Designer.cs">
+      <DependentUpon>frmPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRptCobrotarjetasrechazadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRptCobrotarjetasrechazadas.Designer.cs">
+      <DependentUpon>frmRptCobrotarjetasrechazadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRptCumpleanos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRptCumpleanos.Designer.cs">
+      <DependentUpon>frmRptCumpleanos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRptDonacionesmesuales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRptDonacionesmesuales.Designer.cs">
+      <DependentUpon>frmRptDonacionesmesuales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRpttarjetasRechazadas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRpttarjetasRechazadas.Designer.cs">
+      <DependentUpon>frmRpttarjetasRechazadas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="helpers\leerExcel.cs" />
+    <Compile Include="helpers\tarjetaInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\SortListaCumpleanos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SortListaCumpleanos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\SortListaDonacionesMensuales.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SortListaDonacionesMensuales.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\SortTarjetasRechazadas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SortTarjetasRechazadas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmBienechores.resx">
       <DependentUpon>frmBienechores.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmCatBancos.resx">
+      <DependentUpon>frmCatBancos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCatCuentascobro.resx">
+      <DependentUpon>frmCatCuentascobro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCatEquipos.resx">
       <DependentUpon>frmCatEquipos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCatprogramas.resx">
+      <DependentUpon>frmCatprogramas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCatTipotarjeta.resx">
+      <DependentUpon>frmCatTipotarjeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmObtenerArchivocobro.resx">
+      <DependentUpon>frmObtenerArchivocobro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPagoefectivo.resx">
+      <DependentUpon>frmPagoefectivo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPagos.resx">
+      <DependentUpon>frmPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRptCobrotarjetasrechazadas.resx">
+      <DependentUpon>frmRptCobrotarjetasrechazadas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRptCumpleanos.resx">
+      <DependentUpon>frmRptCumpleanos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRptDonacionesmesuales.resx">
+      <DependentUpon>frmRptDonacionesmesuales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRpttarjetasRechazadas.resx">
+      <DependentUpon>frmRpttarjetasRechazadas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\SortListaCumpleanos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SortListaCumpleanos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\SortListaDonacionesMensuales.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SortListaDonacionesMensuales.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\SortTarjetasRechazadas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SortTarjetasRechazadas.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

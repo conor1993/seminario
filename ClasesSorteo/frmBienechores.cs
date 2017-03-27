@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using CN = ClasesNegocio;
 using System.Data.SqlClient;
+using System.Globalization;
 
 
 namespace ClasesSorteo
@@ -41,24 +42,7 @@ namespace ClasesSorteo
    
 
 
-        private void rdtsi_Click(object sender, EventArgs e)
-        {
-            gpxRecibos.Visible = true;
-            gpxAportacion.Location = new Point(12, 370);
-            if (cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 645); }
-            if (!cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 500); }
 
-
-        }
-
-        private void rdtno_Click(object sender, EventArgs e)
-        {
-            
-            gpxRecibos.Visible = false;
-            gpxAportacion.Location = new Point(12, 271);
-            if (cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 550); }
-            if (!cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 400); }
-        }
 
         //metodos basicos abc
         #region iForm Members
@@ -71,60 +55,68 @@ namespace ClasesSorteo
             }
             set
             {
-                throw new NotImplementedException();
+               
             }
         }
 
         void CN.iForm.Guardar()
         {
-             //if (!validarDatos())
-               // return;
-          
-            //-------------------------------------------obtener datos ----------------------------------------------------------------
-            
-                int contrato = Convert.ToInt32(txtContrato.Text.Trim());
-                String nombre = txtNombre.Text;
-                String apellidop = txtapellidoPaterno.Text;
-                String apellidom = txtapellidoMaterno.Text;
-                int equipoo = (int)cmbequipo.SelectedValue;
-                System.DateTime fecha = dtmcumple.Value;
-                bool estatus = rdtestatussi.Checked;
-                String dom = txtdomicilio.Text.Trim();
-                long telefono = Convert.ToInt64(txtTelefono.Text);
-                long celular = Convert.ToInt64(txtClular.Text);
-                String email = txtemail.Text.Trim();
-                int programa = (int)cmbPrograma.SelectedValue;
-                int cuentac = (int)cmbCuentacobro.SelectedValue;
-                int tipopago = (int)cmbTipopago.SelectedValue;
-                int cantidad=0;
-                try {cantidad = Convert.ToInt32(txtOtracantidad.Text); }
-                catch (Exception ex) {
-                    if (rdtaportacion1000.Checked) { cantidad = 1000; }
-                    if (rdtaportacion1500.Checked) { cantidad = 1500; }
-                    if (rdtAportacion2000.Checked) { cantidad = 2000; }
-                    if (rdtaportacion500.Checked) { cantidad = 500; }
-                }
-              //tarjeta
-                int idbanco=0;
-                int idTipotarjeta = 0;
-                long notarjeta = 0;
-                System.DateTime Fechaexpiracion = dtmExpiracion.Value;
-                int Codigoseguridad = 0;
-                String Clave = "";
+            if(!validarDatos())
+                return;
+             
 
-                if (cmbTipopago.Text.Equals("TARJETA")) {
-                    idbanco = (int)cmbBanco.SelectedValue;
-                    idTipotarjeta = (int)cmbtarjeta.SelectedValue;
-                    notarjeta = Convert.ToInt64(txtNotarjeta.Text);
-                    Codigoseguridad = Convert.ToInt32(txtcodseguridad.Text);
-                    Clave = txtclave.Text;
-                }
+            //-------------------------------------------obtener datos ----------------------------------------------------------------
+            int idbn; 
+            try { idbn = Convert.ToInt32(txtid.Text); }catch(Exception ex){idbn=0;}
+            String contrato = txtContrato.Text.Trim();
+            String nombre = txtNombre.Text;
+            String apellidop = txtapellidoPaterno.Text;
+            String apellidom = txtapellidoMaterno.Text;
+            int equipoo = (int)cmbequipo.SelectedValue;
+            System.DateTime fecha = dtmcumple.Value;
+            bool estatus = rdtestatussi.Checked;
+            String dom = txtdomicilio.Text.Trim();
+            long telefono;
+            long celular = Convert.ToInt64(txtClular.Text);
+            String email = txtemail.Text.Trim();
+            int programa = (int)cmbPrograma.SelectedValue;
+            int cuentac = (int)cmbCuentacobro.SelectedValue;
+            int tipopago = (int)cmbTipopago.SelectedValue;
+            int cantidad = 0;
+            try { cantidad = Convert.ToInt32(txtOtracantidad.Text.Trim());}
+            catch (Exception ex)
+            {
+
+            }
+            //tarjeta
+            int idbanco = 0;
+            int idTipotarjeta = 0;
+            long notarjeta = 0;
+            System.DateTime Fechaexpiracion = dtmExpiracion.Value;
+            int Codigoseguridad = 0;
+            String Clave = "";
+
+            if (cmbTipopago.Text.Equals("TARJETA"))
+            {
+                idbanco = (int)cmbBanco.SelectedValue;
+                idTipotarjeta = (int)cmbtarjeta.SelectedValue;
+                notarjeta = Convert.ToInt64(txtNotarjeta.Text);
+                Codigoseguridad = Convert.ToInt32(txtcodseguridad.Text);
+                Clave = txtclave.Text;
+            }
             //recivo impuesto
-                String razonsocial = txtrazonSocial.Text;
-                String rfc = txtrfc.Text;
-                String domrec = txtdomicilioFiscal.Text;
-                long telrec = Convert.ToInt64(txttelefonoimpuesto.Text);
-         
+            String razonsocial = "";
+            String rfc = "";
+            String domrec = "";
+            long telrec = 0;
+            if (rdtsi.Checked) {
+
+                 razonsocial = txtrazonSocial.Text;
+                rfc = txtrfc.Text;
+                domrec = txtdomicilioFiscal.Text;
+                telrec = Convert.ToInt64(txttelefonoimpuesto.Text);
+            }
+
 
 
             //store procedure--------------------------------------------------------------------------------------------------
@@ -140,6 +132,7 @@ namespace ClasesSorteo
                 _SQLComm.Connection = CN.DBU.Cnn;
 
                 //bienechores
+                _SQLComm.Parameters.Add(new SqlParameter("id", idbn));
                 _SQLComm.Parameters.Add(new SqlParameter("contrato", contrato));
                 _SQLComm.Parameters.Add(new SqlParameter("nombre", nombre));
                 _SQLComm.Parameters.Add(new SqlParameter("apellidoPaterno", apellidop));
@@ -148,7 +141,10 @@ namespace ClasesSorteo
                 _SQLComm.Parameters.Add(new SqlParameter("cumpleaños", fecha));
                 _SQLComm.Parameters.Add(new SqlParameter("estatus", estatus));
                 _SQLComm.Parameters.Add(new SqlParameter("domicilio", dom));
-                _SQLComm.Parameters.Add(new SqlParameter("telefono", telefono));
+
+                try { _SQLComm.Parameters.Add(new SqlParameter("telefono", Convert.ToInt64(txtTelefono.Text))); }
+                catch (Exception ex) { _SQLComm.Parameters.Add(new SqlParameter("telefono", DBNull.Value)); }
+
                 _SQLComm.Parameters.Add(new SqlParameter("celular", celular));
                 _SQLComm.Parameters.Add(new SqlParameter("email", email));
                 _SQLComm.Parameters.Add(new SqlParameter("programa", programa));
@@ -177,15 +173,16 @@ namespace ClasesSorteo
                 CN.DBU.Cnn.Close();
                 limpiar();
                 llenargrid();
-                MessageBox.Show(_SQLComm.Parameters["msg"].Value.ToString(), "Aviso error",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show(_SQLComm.Parameters["msg"].Value.ToString(), "Aviso error", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-            }       
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Errors.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.ToString(), "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
 
 
 
@@ -193,7 +190,7 @@ namespace ClasesSorteo
 
         void CN.iForm.Imprimir()
         {
-            throw new NotImplementedException();
+           
         }
 
         void CN.iForm.Nuevo()
@@ -203,23 +200,28 @@ namespace ClasesSorteo
 
         void CN.iForm.Cancelar()
         {
-            throw new NotImplementedException();
+           
         }
 
         void CN.iForm.Borrar()
         {
-            throw new NotImplementedException();
+           
         }
 
         void CN.iForm.Buscar()
         {
-            throw new NotImplementedException();
+           
         }
 
         private bool validarDatos()
         {
             String mensaje = "";
             bool valido = true;
+
+            if (txtContrato.Text.Trim() == "")
+            {
+                mensaje = mensaje + "    * No se ha capturado el contrato.\n";
+            }
 
             if (txtNombre.Text.Trim() == "") {
                 mensaje = mensaje+ "    * No se ha capturado el nombre.\n"; 
@@ -250,6 +252,25 @@ namespace ClasesSorteo
             if (txtemail.Text.Trim() == "")
             {
                 mensaje = mensaje + "    * No se ha capturado el email.\n";
+            }
+
+            if (cmbPrograma.SelectedIndex == -1)
+            {
+                mensaje = mensaje + "    * No se ha capturado el programa.\n";
+            }
+
+            if (cmbCuentacobro.SelectedIndex == -1)
+            {
+                mensaje = mensaje + "    * No se ha capturado la cuenta de cobro.\n";
+            }
+            if (cmbTipopago.SelectedIndex == -1)
+            {
+                mensaje = mensaje + "    * No se ha capturado el tipo de pago.\n";
+            }
+
+            if (txtOtracantidad.Text.Trim() == "")
+            {
+                mensaje = mensaje + "    * No se ha capturado la cantidad.\n";
             }
 
             if (rdtsi.Checked)
@@ -310,6 +331,7 @@ namespace ClasesSorteo
         private void limpiar() {
          
             //datos
+            txtid.Text = "";
             txtContrato.Text = "";
             txtNombre.Text = "";
             txtapellidoMaterno.Text = "";
@@ -333,6 +355,7 @@ namespace ClasesSorteo
             cmbPrograma.SelectedValue = 0;
             cmbequipo.SelectedValue = 0;
             cmbBanco.SelectedValue = 0;
+            rdtno.Checked=true;
 
            
            
@@ -422,11 +445,57 @@ namespace ClasesSorteo
             if (dgvBienechores.SelectedRows.Count > 0)
             {
                
-                traerdatosBienechores(dgvBienechores.SelectedRows[0].Cells[0].Value.ToString());
+               
+                traerdatosBienechores(Convert.ToInt32(dgvBienechores.SelectedRows[0].Cells[0].Value.ToString()));
                 
             }
         }
 
+        private void rdtsi_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdtsi.Checked)
+            {
+                gpxRecibos.Visible = true;
+                gpxAportacion.Location = new Point(12, 370);
+                if (cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 645); }
+                if (!cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 500); }
+
+            }
+        }
+
+        private void rdtno_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdtno.Checked)
+            {
+                gpxRecibos.Visible = false;
+                gpxAportacion.Location = new Point(12, 271);
+                if (cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 550); }
+                if (!cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 400); }
+
+            }
+        }
+
+        private void rdtsi_Click(object sender, EventArgs e)
+        {
+            gpxRecibos.Visible = true;
+            gpxAportacion.Location = new Point(12, 370);
+            if (cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 645); }
+            if (!cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 500); }
+
+
+        }
+
+        private void rdtno_Click(object sender, EventArgs e)
+        {
+
+            gpxRecibos.Visible = false;
+            gpxAportacion.Location = new Point(12, 271);
+            if (cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 550); }
+            if (!cmbTipopago.Text.Equals("TARJETA")) { dgvBienechores.Location = new Point(18, 400); }
+        }
+  
+
+ 
 
         // metodos del sistema
 
@@ -603,7 +672,7 @@ namespace ClasesSorteo
                 String cons = "";
 
                 DtAdap = new SqlDataAdapter();
-                cons = "select contrato as Referencia , Nombre, ApellidoPaterno+' '+ApellidoMaterno as Apellido from SortCatBienechores";
+                cons = "select id, Contrato as Referencia , Nombre, ApellidoPaterno+' '+ApellidoMaterno as Apellido from SortCatBienechores where Estatus = 1 ";
                 DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
                 dtsPar = new DataSet();
                 dtsPar.Tables.Clear();
@@ -616,7 +685,7 @@ namespace ClasesSorteo
 
         }
 
-        private void traerdatosBienechores(string contrato)
+        private void traerdatosBienechores(int id)
         {
 
             DtAdap = new SqlDataAdapter();
@@ -628,8 +697,8 @@ namespace ClasesSorteo
                     CN.DBU.Cnn.Open();
 
                 String cons ="select  * from SortCatBienechores as bnc "
-                            +"left join SortCatTarjetas  as trj   on bnc.Contrato = trj.IdBienechor "
-                            + "left join SortCatRecivoImpuesto as rec on rec.IdBienechor = bnc.Contrato where bnc.Contrato= " + "'" + contrato.Trim() + "'";
+                                +"left join SortCatTarjetas  as trj   on bnc.id = trj.IdBienechor "
+                                +"left join SortCatRecivoImpuesto as rec on rec.IdBienechor = bnc.id where bnc.id= "+id;
 
                 
                 DtAdap.SelectCommand = new SqlCommand(cons, CN.DBU.Cnn);
@@ -638,37 +707,38 @@ namespace ClasesSorteo
 
                 limpiar();
                 //datos de bienechores
-                txtContrato.Text = dtseqp.Tables[0].Rows[0].ItemArray[0].ToString();
-                txtNombre.Text = dtseqp.Tables[0].Rows[0].ItemArray[1].ToString();
-                txtapellidoPaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[2].ToString();
-                txtapellidoMaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[3].ToString();
-                cmbequipo.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[4];
-                dtmcumple.Value = (System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[5];
-                txtdomicilio.Text = dtseqp.Tables[0].Rows[0].ItemArray[6].ToString();
-                txtTelefono.Text = dtseqp.Tables[0].Rows[0].ItemArray[7].ToString();
-                txtClular.Text = dtseqp.Tables[0].Rows[0].ItemArray[8].ToString();
-                cmbPrograma.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[10];
-                cmbTipopago.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[11];
-                cmbCuentacobro.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[12];
-                txtemail.Text = dtseqp.Tables[0].Rows[0].ItemArray[13].ToString();
-                txtOtracantidad.Text = dtseqp.Tables[0].Rows[0].ItemArray[14].ToString();
+                txtid.Text = dtseqp.Tables[0].Rows[0].ItemArray[0].ToString();
+                txtContrato.Text = dtseqp.Tables[0].Rows[0].ItemArray[1].ToString();
+                txtNombre.Text = dtseqp.Tables[0].Rows[0].ItemArray[2].ToString();
+                txtapellidoPaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[3].ToString();
+                txtapellidoMaterno.Text = dtseqp.Tables[0].Rows[0].ItemArray[4].ToString();
+                cmbequipo.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[5];
+                dtmcumple.Value = (System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[6];
+                txtdomicilio.Text = dtseqp.Tables[0].Rows[0].ItemArray[7].ToString();
+                txtTelefono.Text = dtseqp.Tables[0].Rows[0].ItemArray[8].ToString();
+                txtClular.Text = dtseqp.Tables[0].Rows[0].ItemArray[9].ToString();                    
+                cmbPrograma.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[11];
+                cmbTipopago.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[12];
+                cmbCuentacobro.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[13];
+                txtemail.Text = dtseqp.Tables[0].Rows[0].ItemArray[14].ToString();
+                txtOtracantidad.Text = Convert.ToDouble(dtseqp.Tables[0].Rows[0].ItemArray[15]).ToString();
                 //tarjeta
-                if (DBNull.Value != dtseqp.Tables[0].Rows[0].ItemArray[15]) {
-                  cmbBanco.SelectedValue=dtseqp.Tables[0].Rows[0].ItemArray[17];
-                  cmbtarjeta.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[18];
-                  txtNotarjeta.Text = dtseqp.Tables[0].Rows[0].ItemArray[19].ToString();
-                  dtmExpiracion.Value=(System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[20];
-                  txtcodseguridad.Text = dtseqp.Tables[0].Rows[0].ItemArray[21].ToString();
-                  txtclave.Text = dtseqp.Tables[0].Rows[0].ItemArray[22].ToString();
+                if (DBNull.Value != dtseqp.Tables[0].Rows[0].ItemArray[17]) {
+                  cmbBanco.SelectedValue=dtseqp.Tables[0].Rows[0].ItemArray[18];
+                  cmbtarjeta.SelectedValue = dtseqp.Tables[0].Rows[0].ItemArray[19];
+                  txtNotarjeta.Text = dtseqp.Tables[0].Rows[0].ItemArray[20].ToString();
+                  dtmExpiracion.Value=(System.DateTime)dtseqp.Tables[0].Rows[0].ItemArray[21];
+                  txtcodseguridad.Text = dtseqp.Tables[0].Rows[0].ItemArray[22].ToString();
+                  txtclave.Text = dtseqp.Tables[0].Rows[0].ItemArray[23].ToString();
 
                 }
-                if (DBNull.Value != dtseqp.Tables[0].Rows[0].ItemArray[23])
+                if (DBNull.Value != dtseqp.Tables[0].Rows[0].ItemArray[24])
                 {
                     rdtsi.Checked=true;
-                    txtrazonSocial.Text = dtseqp.Tables[0].Rows[0].ItemArray[24].ToString();
-                    txtrfc.Text = dtseqp.Tables[0].Rows[0].ItemArray[25].ToString();
-                    txtdomicilioFiscal.Text = dtseqp.Tables[0].Rows[0].ItemArray[26].ToString();
-                    txttelefonoimpuesto.Text = dtseqp.Tables[0].Rows[0].ItemArray[27].ToString();
+                    txtrazonSocial.Text = dtseqp.Tables[0].Rows[0].ItemArray[25].ToString();
+                    txtrfc.Text = dtseqp.Tables[0].Rows[0].ItemArray[26].ToString();
+                    txtdomicilioFiscal.Text = dtseqp.Tables[0].Rows[0].ItemArray[27].ToString();
+                    txttelefonoimpuesto.Text = dtseqp.Tables[0].Rows[0].ItemArray[28].ToString();
                 }
 
                 CN.DBU.Cnn.Close();
@@ -680,6 +750,18 @@ namespace ClasesSorteo
             }
 
         }
+
+        private void txtcodseguridad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+
+
 
 
 
